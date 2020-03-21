@@ -1,0 +1,109 @@
+//SCRIPT OUTPUTS
+// Time to complete one script loop. 1:35
+// XP
+// Gives     7 852 xp    in one script loop.
+// Gives   297 549 xp    in one hour.
+// ITEMS
+// Gives        26 coals in one script loop.
+// Gives       985 coals in one hour.
+// Money
+// Gives    75 400 coins in one script loop.
+// Gives 2 857 263 coins in one hour.
+// In case coal price is 2900 coins.
+
+//1 SETTINGS SETTINGS
+//Set screen mode to Fixed-screen mode and then to Resizable-screen mode.
+//Only enable VBO mode. CDL.
+//Leave brigthness as is.
+//Set Screen size to (790 570)
+
+//2 SETTINGS CAMERA
+//Set camera to north.
+//Set camera to most high with w.
+//Zoom out as much as possible.
+
+//3 SETTINGS INGAME PERMANENT
+//Set private to off.
+//Set retaliate to off.
+//Set NPC option priority to on.
+//Set disable public chat effects to on.
+//Set accept aid to off.
+
+//4 SETTINGS INGAME TEMPORARY
+//Set run on.
+
+//BUGS
+//
+program new;
+//{$DEFINE SMART}
+{$i AeroLib/AeroLib.Simba}
+
+var
+  OurWords: String;
+
+Procedure ColorTest;
+var
+  color_White : TColEx;
+  foundPnt    : TPoint;
+  angle: extended;
+begin
+  color_White.create(10476799, 1, 1.26, 0.03);
+  angle := getCompassAngle();
+  Writeln(angle);
+    toggleRunning(true);
+    setAngle(ANGLE_HIGH);
+      keydown(37);
+      wait(500);
+      keyup(37);
+    CompassMovement( 60, 120, true);
+    SetAngle(RandomRange(255, 285)); // West = 270, +-15
+  if color_White.findIn(AREA_MS, foundPnt) then
+  begin
+    writeln('Found white on the minimap at '+toStr(foundPnt));
+    HumanMMouse(foundPnt, 0, 0);
+    FastClick(Mouse_left);
+    wait(3000);
+  end;
+  if not color_White.findIn(AREA_MS, foundPnt) then
+  begin
+
+      keydown(37);
+      wait(500);
+      keyup(37);
+    CompassMovement( 60, 120, true);
+  SetAngle(RandomRange(255, 285)); // West = 270, +-15
+  end;
+end;
+Procedure CollectCoins;
+var
+  color_White : TColEx;
+  foundPnt    : TPoint;
+begin
+  color_White.create(2356223, 1, 1.26, 0.03);
+  if color_White.findIn(AREA_MS, foundPnt) then
+  begin
+    writeln('Found white on the minimap at '+toStr(foundPnt));
+    HumanMMouse(foundPnt, 0, 0);
+    FastClick(Mouse_left);
+    wait(3000);
+  end;
+end;
+Procedure RotateCam;
+begin
+CompassMovement(10,180,False);
+end;
+
+begin
+  initAL;
+  OurWords := 'Hello World!';
+  Writeln(OurWords);
+  OurWords := 'Goodbye World!';
+  Writeln(OurWords);
+  RotateCam;
+  ColorTest;
+
+  repeat
+  CollectCoins;
+    ColorTest;
+  Until(False);
+end.

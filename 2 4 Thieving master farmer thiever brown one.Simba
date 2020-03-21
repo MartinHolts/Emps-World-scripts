@@ -1,0 +1,29 @@
+program new;
+//{$DEFINE SMART}
+{$i AeroLib/AeroLib.Simba}
+
+var
+  OurWords: String;
+
+Procedure ColorTest;
+var
+  color_White : TColEx;
+  foundPnt    : TPoint;
+  var x, y: integer;
+begin
+  color_White.create(11130617, 1, 1.26, 0.03);
+  if color_White.findIn(AREA_MS, foundPnt) then
+  begin
+    writeln('Found color at'+toStr(foundPnt));
+    HumanMMouse(foundPnt, 0, 0);
+    FastClick(Mouse_left);
+    wait(200);
+  end;
+end;
+
+begin
+  initAL;
+  repeat
+    ColorTest;
+  Until(False);
+end.

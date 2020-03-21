@@ -1,0 +1,67 @@
+program new;
+//{$DEFINE SMART}
+{$i AeroLib/AeroLib.Simba}
+
+var
+  OurWords: String;
+
+Procedure ColorTest;
+var
+  color_White : TColEx;
+  color_ShopkeeperYellowText : TColEx;
+  color_HealthRed : TColEx;
+  color_MonkfishPink : TColEx;
+  color_MonkfishOrangeText : TColEx;
+  color_HealthYellow : TColEx;
+  foundPnt    : TPoint;
+  var x, y: integer;
+begin
+  color_White.create(7045220, 1, 1.26, 0.03);
+  color_ShopkeeperYellowText.create(65278, 1, 1.26, 0.03);
+  color_HealthRed.create(855540, 1, 1.26, 0.03);
+  color_MonkfishPink.create(8290746, 1, 1.26, 0.03);
+  color_MonkfishOrangeText.create(4231166, 1, 1.26, 0.03);
+  color_HealthYellow.create(65278, 1, 1.26, 0.03);
+  if color_White.findIn(AREA_MS, foundPnt) then
+  begin                     16711168
+    writeln('Found color at'+toStr(foundPnt));
+    HumanMMouse(foundPnt, 0, 0);
+    if color_ShopkeeperYellowText.findIn(AREA_MS, foundPnt) then
+    begin
+      writeln('Found color at'+toStr(foundPnt));
+      FastClick(Mouse_left);
+      wait(400);
+      if color_HealthRed.findIn(AREA_MS, foundPnt) then
+      begin
+        if color_MonkfishPink.findIn(AREA_MS, foundPnt) then
+        begin
+          HumanMMouse(foundPnt, 0, 0);
+          if color_MonkfishOrangeText.findIn(AREA_MS, foundPnt) then
+          begin
+            FastClick(Mouse_left);
+            wait(1500);
+          end;
+        end;
+      end;
+      if color_HealthYellow.findIn(AREA_MM, foundPnt) then
+      begin
+        if color_MonkfishPink.findIn(AREA_INV, foundPnt) then
+        begin
+          HumanMMouse(foundPnt, 0, 0);
+          if color_MonkfishOrangeText.findIn(AREA_MS, foundPnt) then
+          begin
+            FastClick(Mouse_left);
+            wait(1500);
+          end;
+        end;
+      end;
+    end;
+  end;
+end;
+
+begin
+  initAL;
+  repeat
+    ColorTest;
+  Until(False);
+end.

@@ -1,0 +1,507 @@
+//SCRIPT OUTPUTS
+// Time to complete one script loop. 1:35
+// XP
+// Gives     7 852 xp    in one script loop.
+// Gives   297 549 xp    in one hour.
+// ITEMS
+// Gives        26 coals in one script loop.
+// Gives       985 coals in one hour.
+// Money
+// Gives    75 400 coins in one script loop.
+// Gives 2 857 263 coins in one hour.
+// In case coal price is 2900 coins.
+
+//1 SETTINGS SETTINGS
+//Set screen mode to Fixed-screen mode and then to Resizable-screen mode.
+//Only enable VBO mode. CDL.
+//Leave brigthness as is.
+//Set Screen size to (790 570)
+
+//2 SETTINGS CAMERA
+//Set camera to north.
+//Set camera to most high with w.
+//Zoom out as much as possible.
+
+//3 SETTINGS INGAME PERMANENT
+//ANTIPLAYER
+//Set accept aid to off.
+//NPC ATTACK
+//Set NPC option priority to off.
+//Set retaliate to off.
+//COLOR FINDING
+//Set private to off.
+//Set disable public chat effects to on.
+
+//4 SETTINGS INGAME TEMPORARY
+//Be left of barbarian bank chest and near it before starting script.
+//Make sure you are not sitting.
+//Set run on.
+//Have rune ess in first place in bank.
+//Have Puches in first place in inventory. Most left and top row.
+//Have talisman in inventory. Don't have in place where poches would be.
+//Enter in the scipt what runes you want to make and how many pouches you have in inverntory.
+//settingute alt võtta ära NPC option priority
+
+//BUGS
+//COLOR
+//Doesn't find back box sometimes and misclassifies the color as somebodies equipment or Barbarian axe.
+//TIMING
+//Doesn't deposite all rune ess sometimes into pouches.
+//Doesn't undeposite all rune ess sometimes from pouches.
+program new;
+{$i AeroLib/AeroLib.Simba}
+var
+  failCounter: integer;
+
+const
+//blood nature death water fire soul
+  OurWords = 'death';
+//0 1 2 3 4
+  NumberOfPouchesToUse = 0;
+
+Procedure TeleToBarbGoToBank;
+begin
+    //click on quest tab
+    MoveMouse(628, 256);
+    wait(100);
+    FastClick(Mouse_left);
+
+    //click on barbarian teleport
+    MoveMouse(597, 343);
+    wait(100);
+    FastClick(Mouse_left);
+
+    //click on yes
+    MoveMouse(267, 466);
+    wait(400);
+    FastClick(Mouse_left);
+    wait(5000);
+
+    //click on minimap to go to bank
+    MoveMouse(668, 63);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(random(7000,8000));
+    if (random(1,50)=50) then
+    begin
+      wait(random(500,8000));
+    end;
+end;
+
+Procedure CraftRuneAtAltarSecondTimeSoul;
+begin
+  //Click on Altar
+  MoveMouse(435, 330);
+  wait(100);
+  FastClick(Mouse_left);
+end;
+
+Procedure CraftRuneAtAltarSecondTimeDeath;
+begin
+  //Click on Altar
+  MoveMouse(361, 220);
+  wait(100);
+  FastClick(Mouse_left);
+end;
+
+Procedure CraftRuneAtAltarSecondTimeNature;
+begin
+  //Click on Altar
+  MoveMouse(407, 232);
+  wait(100);
+  FastClick(Mouse_left);
+end;
+
+Procedure CraftRuneAtAltarSecondTimeBlood;
+begin
+  //Click on Altar
+  MoveMouse(329, 182);
+  wait(100);
+  FastClick(Mouse_left);
+end;
+
+
+Procedure CraftRuneAtAltarSecondTimeWater;
+begin
+  //Click on Altar
+  MoveMouse(392, 212);
+  wait(100);
+  FastClick(Mouse_left);
+end;
+
+Procedure CraftRuneAtAltarSecondTimeFire;
+begin
+  //Click on Altar
+  MoveMouse(479, 300);
+  wait(100);
+  FastClick(Mouse_left);
+end;
+
+Procedure EmptyPouches;
+begin
+  //Empty pouch 1
+  if (NumberOfPouchesToUse >= 1) then
+  begin
+    MoveMouse(613, 256);
+    wait(100);
+    FastClick(Mouse_right);
+    MoveMouse(605, 300);
+    wait(100);
+    FastClick(Mouse_left);
+  end;
+
+  //Empty pouch 2
+  if (NumberOfPouchesToUse >= 2) then
+  begin
+    MoveMouse(653, 256);
+    wait(100);
+    FastClick(Mouse_right);
+    MoveMouse(653, 300);
+    wait(100);
+    FastClick(Mouse_left);
+  end;
+
+  //Empty pouch 3
+  if (NumberOfPouchesToUse >= 3) then
+  begin
+    MoveMouse(697, 256);
+    wait(100);
+    FastClick(Mouse_right);
+    MoveMouse(697, 300);
+    wait(100);
+    FastClick(Mouse_left);
+  end;
+
+  //Empty pouch 4
+  if (NumberOfPouchesToUse >= 4) then
+  begin
+    MoveMouse(742, 256);
+    wait(100);
+    FastClick(Mouse_right);
+    MoveMouse(742, 300);
+    wait(100);
+    FastClick(Mouse_left);
+  end;
+end;
+
+Procedure CraftRuneAtAltarSoul;
+begin
+  //Click on Altar
+  MoveMouse(687, 150);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(4500);
+  //Click on Altar
+  MoveMouse(435, 330);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(1500);
+end;
+
+Procedure CraftRuneAtAltarDeath;
+begin
+  //Click on Altar
+  MoveMouse(284, 44);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(3000);
+end;
+
+Procedure CraftRuneAtAltarNature;
+begin
+  //Click on Altar
+  MoveMouse(399, 48);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(2000);
+end;
+
+Procedure CraftRuneAtAltarBlood;
+begin
+  //Click on Altar
+  wait(1000);
+  MoveMouse(167, 36);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(2500);
+end;
+
+Procedure CraftRuneAtAltarWater;
+begin
+  //Click on Altar
+  MoveMouse(638, 108);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(3500);
+  MoveMouse(392, 212);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(500);
+end;
+
+Procedure CraftRuneAtAltarFire;
+begin
+  //Click on Altar
+  MoveMouse(711, 150);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(3500);
+  MoveMouse(479, 300);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(500);
+end;
+
+Procedure EnterAltar;
+begin
+  //Click on Altar
+  MoveMouse(309, 325);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(5000);
+end;
+
+Procedure GoToAltar;
+begin
+  //Click 1 on minimap
+  MoveMouse(619, 87);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(8000);
+
+  //Click 2 on minimap
+  MoveMouse(631, 81);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(6000);
+end;
+
+Procedure PickEss;
+begin
+  //Withdraw rune ess
+  MoveMouse(57, 132);
+  wait(100);
+  FastClick(Mouse_right);
+  MoveMouse(95, 214);
+  wait(200);
+  FastClick(Mouse_left);
+
+  //close bank tab
+  MoveMouse(493, 62);
+  wait(200);
+  FastClick(Mouse_left);
+end;
+
+Procedure PutEssInPouches;
+begin
+
+  //Fill pouch 1
+  if (NumberOfPouchesToUse >= 1) then
+  begin
+    MoveMouse(613, 256);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(100);
+  end;
+
+  //Fill pouch 2
+  if (NumberOfPouchesToUse >= 2) then
+  begin
+    MoveMouse(653, 260);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(100);
+  end;
+
+  //Fill pouch 3
+  if (NumberOfPouchesToUse >= 3) then
+  begin
+    MoveMouse(697, 260);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(100);
+  end;
+
+  //Fill pouch 4
+  if (NumberOfPouchesToUse >= 4) then
+  begin
+    MoveMouse(742, 258);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(100);
+  end;
+end;
+
+Procedure DepositeThingsInBank;
+var
+  x, y : integer;
+  foundPnt    : TPoint;
+  color_BankBox : TColEx;
+  color_BankBlue : TColEx;
+  color_ShopOrange : TColEx;
+begin
+  color_BankBox.create(9079444, 1, 1.26, 0.03);
+  color_BankBlue.create(16579584, 1, 1.26, 0.03);
+  color_ShopOrange.create(2070783, 1, 1.26, 0.03);
+  if color_BankBox.findIn(AREA_MS, foundPnt) then
+  begin
+    writeln('Found color BankBox'+toStr(foundPnt));
+    HumanMMouse(foundPnt, 0, 0);
+    GetMousePos(x, y);
+    MoveMouse(x + 13, y + 15);
+    wait(300);
+    if color_BankBlue.findIn(AREA_MS, foundPnt) then
+    begin
+      writeln('Found color BankBlue'+toStr(foundPnt));
+      FastClick(Mouse_left);
+      wait(1500);
+      if color_ShopOrange.findIn(AREA_MS, foundPnt) then
+      begin
+        writeln('Found color ShopOrange'+toStr(foundPnt));
+        wait(200);
+      end else
+      begin
+        writeln('Didnt find color ShopOrange');
+        MoveMouse(684, 118);
+        wait(500);
+        FastClick(Mouse_left);
+        wait(1500);
+        writeln('failCounter'+toStr(failCounter));
+        failCounter := (failCounter + 1);
+        if (failCounter = 10) then
+        begin
+          failCounter := 0;
+          writeln('failCounter in if'+toStr(failCounter));
+          TeleToBarbGoToBank;
+          DepositeThingsInBank;
+        end else
+        begin
+          DepositeThingsInBank;
+        end;
+      end;
+    end else
+    begin
+      writeln('Didnt find color BankBlue');
+      MoveMouse(684, 118);
+      wait(500);
+      FastClick(Mouse_left);
+      wait(1500);
+      writeln('failCounter'+toStr(failCounter));
+      failCounter := (failCounter + 1);
+      if (failCounter = 10) then
+      begin
+        failCounter := 0;
+        writeln('failCounter in if'+toStr(failCounter));
+        TeleToBarbGoToBank;
+        DepositeThingsInBank;
+      end else
+      begin
+        DepositeThingsInBank;
+      end;
+    end;
+  end else
+  begin
+    writeln('Didnt find color BankBox');
+    MoveMouse(684, 118);
+    wait(500);
+    FastClick(Mouse_left);
+    wait(1500);
+    writeln('failCounter'+toStr(failCounter));
+    failCounter := (failCounter + 1);
+    if (failCounter = 10) then
+    begin
+      failCounter := 0;
+      writeln('failCounter in if'+toStr(failCounter));
+      TeleToBarbGoToBank;
+      DepositeThingsInBank;
+    end else
+    begin
+      DepositeThingsInBank;
+    end;
+  end;
+end;
+
+begin
+  initAL;
+  repeat
+    DepositeThingsInBank;
+    PickEss;
+    if (NumberOfPouchesToUse > 0) then
+    begin
+      PutEssInPouches;
+    end;
+      if (NumberOfPouchesToUse > 0) then
+    begin
+      DepositeThingsInBank;
+    end;
+      if (NumberOfPouchesToUse > 0) then
+    begin
+      PickEss;
+    end;
+    GoToAltar;
+    EnterAltar;
+    //blood
+    if (OurWords = 'blood') then
+    begin
+      CraftRuneAtAltarBlood;
+    end;
+    //nature
+    if (OurWords = 'nature') then
+    begin
+      CraftRuneAtAltarNature;
+    end;
+    //death
+    if (OurWords = 'death') then
+    begin
+      CraftRuneAtAltarDeath;
+    end;
+    if (OurWords = 'water') then
+    begin
+      CraftRuneAtAltarWater;
+    end;
+    if (OurWords = 'fire') then
+    begin
+      CraftRuneAtAltarFire;
+    end;
+    if (OurWords = 'soul') then
+    begin
+      CraftRuneAtAltarSoul;
+    end;
+    if (NumberOfPouchesToUse > 0) then
+    begin
+      EmptyPouches;
+    end;
+    if (NumberOfPouchesToUse > 0) then
+    begin
+      //blood
+      if (OurWords = 'blood') then
+      begin
+        CraftRuneAtAltarSecondTimeBlood;
+      end;
+      //nature
+      if (OurWords = 'nature') then
+      begin
+        CraftRuneAtAltarSecondTimeNature;
+      end;
+      //death
+      if (OurWords = 'death') then
+      begin
+        CraftRuneAtAltarSecondTimeDeath;
+      end;
+      if (OurWords = 'water') then
+      begin
+        CraftRuneAtAltarSecondTimeWater;
+      end;
+      if (OurWords = 'fire') then
+      begin
+        CraftRuneAtAltarSecondTimeFire;
+      end;
+      if (OurWords = 'soul') then
+      begin
+        CraftRuneAtAltarSecondTimeSoul;
+      end;
+    end;
+    TeleToBarbGoToBank;
+    failCounter := 0;
+  Until(False);
+end.

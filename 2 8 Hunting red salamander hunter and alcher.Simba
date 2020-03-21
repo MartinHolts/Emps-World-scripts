@@ -1,0 +1,213 @@
+//set screen size to fixed screen size
+//zoom in camera 100%
+//turn only VBO MMB CDL Ani on.
+//set traps south of tree.
+//set angle to top
+//set compass to north.
+program new;
+//{$DEFINE SMART}
+{$i AeroLib/AeroLib.Simba}
+
+Procedure MimeCheck;
+var
+  color_MimeRed : TColEx;
+  foundPnt    : TPoint;
+begin
+  color_MimeRed.create(659028, 1, 1.26, 0.03);
+  if color_MimeRed.findIn(AREA_MS, foundPnt) then
+  begin
+    //open emotes tab
+    MoveMouse(713, 512);
+    wait(100);
+    FastClick(Mouse_left);
+
+    //click on emotes 10 times
+    MoveMouse(575, 266);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(100);
+  end;
+end;
+
+Procedure ChickenCheck;
+var
+  color_ChickenYellow : TColEx;
+  foundPnt    : TPoint;
+begin
+  color_ChickenYellow.create(11598844, 1, 1.26, 0.03);
+  if color_ChickenYellow.findIn(AREA_MM, foundPnt) then
+  begin
+    writeln('Found color ChickenYellow'+toStr(foundPnt));
+    //click on minimap
+    MoveMouse(702, 86);
+    wait(1000);
+    FastClick(Mouse_left);
+
+    //open quest tab
+    MoveMouse(613, 216);
+    wait(1000);
+    FastClick(Mouse_left);
+
+    //click on barbarian teleport
+    MoveMouse(579, 306);
+    wait(1000);
+    FastClick(Mouse_left);
+
+    //click on yes
+    MoveMouse(267, 432);
+    wait(5000);
+    FastClick(Mouse_left);
+    wait(3000);
+
+    //click on minimap to go to bank
+    MoveMouse(619, 66);
+    wait(1000);
+    FastClick(Mouse_left);
+    wait(6000);
+  end;
+end;
+
+Procedure AlchRedSalamander;
+var
+  color_RedSalamanderRed : TColEx;
+  color_CoinsWhite : TColEx;
+  foundPnt    : TPoint;
+begin
+  color_RedSalamanderRed.create(596561, 1, 1.26, 0.03);
+  color_CoinsWhite.create(65278, 1, 1.26, 0.03);
+  if color_RedSalamanderRed.findIn(AREA_INV, foundPnt) then
+  begin
+    writeln('Found color RedSalamanderRed'+toStr(foundPnt));
+    //open Mage book
+    MoveMouse(747, 216);
+    wait(200);
+    FastClick(Mouse_left);
+    //click on high alch spell
+    MoveMouse(675, 354);
+    wait(200);
+    FastClick(Mouse_left);
+    //click on red salamander
+    wait(100);
+    HumanMMouse(foundPnt, 0, 0);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(2000);
+    //open inventory tab
+    MoveMouse(655, 216);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(400);
+    if color_CoinsWhite.findIn(AREA_INV, foundPnt) then
+    begin
+      writeln('Found color CoinsWhite'+toStr(foundPnt));
+      if color_RedSalamanderRed.findIn(AREA_INV, foundPnt) then
+      begin
+        writeln('Found color RedSalamanderRed'+toStr(foundPnt));
+        AlchRedSalamander;
+      end;
+    end else
+    begin
+      //open inventory tab
+      MoveMouse(655, 216);
+      wait(200);
+      FastClick(Mouse_left);
+      writeln('Didnt find color CoinsWhite'+toStr(foundPnt));
+    end;
+  end;
+end;
+
+Procedure PickUpBoxesPutDownBoxes;
+var
+  color_BoxTrapBrownInInv : TColEx;
+  color_RedSalamanderRed : TColEx;
+  foundPnt    : TPoint;
+begin
+  color_BoxTrapBrownInInv.create(6455183, 1, 1.26, 0.03);
+  //pick up box 1
+  MoveMouse(117, 217);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(600);
+  //put down box 1
+  if color_BoxTrapBrownInInv.findIn(AREA_INV, foundPnt) then
+  begin
+    writeln('Found color BoxTrapBrownInInv'+toStr(foundPnt));
+    HumanMMouse(foundPnt, 0, 0);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(2000);
+  end;
+
+  //pick up box 2
+  MoveMouse(253, 101);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(600);
+  //put down box 2
+  if color_BoxTrapBrownInInv.findIn(AREA_INV, foundPnt) then
+  begin
+    writeln('Found color BoxTrapBrownInInv'+toStr(foundPnt));
+    HumanMMouse(foundPnt, 0, 0);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(2000);
+  end;
+
+  //pick up box 3
+  MoveMouse(378, 223);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(600);
+  //put down box 3
+  if color_BoxTrapBrownInInv.findIn(AREA_INV, foundPnt) then
+  begin
+    writeln('Found color BoxTrapBrownInInv'+toStr(foundPnt));
+    HumanMMouse(foundPnt, 0, 0);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(2000);
+  end;
+
+  //pick up box 4
+  MoveMouse(253, 343);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(600);
+  //put down box 4
+  if color_BoxTrapBrownInInv.findIn(AREA_INV, foundPnt) then
+  begin
+    writeln('Found color BoxTrapBrownInInv'+toStr(foundPnt));
+    HumanMMouse(foundPnt, 0, 0);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(2000);
+  end;
+end;
+
+begin
+  initAL;
+  repeat
+    AlchRedSalamander;
+    PickUpBoxesPutDownBoxes;
+    MimeCheck;
+    ChickenCheck;
+  Until(False);
+end.

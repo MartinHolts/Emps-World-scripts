@@ -1,0 +1,395 @@
+//Resizable-screen mode
+//have x as 14
+//Have VBO on
+//2340
+program new;
+{$i AeroLib/AeroLib.Simba}
+
+Procedure ChickenCheck;
+var
+  color_ChickenYellow : TColEx;
+  foundPnt    : TPoint;
+begin
+  color_ChickenYellow.create(11730173, 1, 1.26, 0.03);
+  if color_ChickenYellow.findIn(AREA_MS, foundPnt) then
+  begin
+    writeln('Found color ChickenYellow'+toStr(foundPnt));
+    //click on minimap
+    MoveMouse(757, 121);
+    wait(1000);
+    FastClick(Mouse_left);
+    wait(9000);
+
+    //click on minimap 2nd time
+    MoveMouse(613, 113);
+    wait(1000);
+    FastClick(Mouse_left);
+    wait(9000);
+  end;
+end;
+
+Procedure MimeCheck;
+var
+  color_CurtainRed : TColEx;
+  color_BankBoxWhite : TColEx;
+  foundPnt    : TPoint;
+  x, y : integer;
+begin
+  color_CurtainRed.create(1117282, 1, 1.26, 0.03);
+  color_BankBoxWhite.create(16777215, 1, 1.26, 0.03);
+  if color_CurtainRed.findIn(AREA_MS, foundPnt) then
+  begin
+    writeln('Found color color_CurtainRed'+toStr(foundPnt));
+    //leftclick on inv tab
+    MoveMouse(697, 514);
+    wait(200);
+    FastClick(Mouse_left);
+
+    //rightclick on ring
+    MoveMouse(733, 414);
+    wait(200);
+    FastClick(Mouse_right);
+
+    //leftclick on ring
+    GetMousePos(x, y);
+    MoveMouse(x, y + 30);
+    wait(200);
+    FastClick(Mouse_left);
+
+    //leftclick on Emps-Wars
+    MoveMouse(269, 452);
+    wait(200);
+    FastClick(Mouse_right);
+
+    //leftclick on map
+    MoveMouse(683, 140);
+    wait(200);
+    FastClick(Mouse_right);
+    wait(5000);
+    if color_BankBoxWhite.findIn(AREA_MS, foundPnt) then
+    begin
+      writeln('Found color color_BankBoxWhite'+toStr(foundPnt));
+      //leftclick on bankbox
+      HumanMMouse(foundPnt, 0, 0);
+      FastClick(Mouse_left);
+    end;
+  end;
+end;
+
+Procedure DoAll;
+var
+  x, y : integer;
+begin
+
+//right click on bank clerk
+  MoveMouse(393, 203);
+  wait(200);
+  FastClick(Mouse_right);
+
+//left click on bank clerk
+  MoveMouse(391, 241);
+  wait(200);
+  FastClick(Mouse_left);
+
+//wait for bank to load
+  wait(1100);
+
+//rightclick on gem
+  MoveMouse(56, 135);
+  wait(200);
+  FastClick(Mouse_right);
+
+//leftclick on withdraw all
+  GetMousePos(x, y);
+  MoveMouse(x, y + 80);
+  wait(200);
+  FastClick(Mouse_left);
+
+//exit bank
+  MoveMouse(490, 64);
+  wait(200);
+  FastClick(Mouse_left);
+
+//click to go up and right one square
+  MoveMouse(433, 269);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(3000);
+
+//click to go one square down
+  MoveMouse(401, 343);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(3000);
+
+//use Tinderbox on Log 2
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(657, 257);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 3
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(701, 257);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 4
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(745, 258);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 5
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(613, 291);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 6
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(657, 291);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 7
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(701, 291);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 8
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(745, 291);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 9
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(613, 325);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 10
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(657, 325);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 11
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(701, 325);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 12
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(745, 325);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 13
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(613, 359);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 14
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(657, 359);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 15
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(701, 359);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 16
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(745, 359);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 17
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(613, 393);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 18
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(657, 393);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 19
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(701, 393);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 20
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(745, 393);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 21
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(613, 427);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 22
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(657, 427);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 23
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(701, 427);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 24
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(745, 427);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 25
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(613, 461);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 26
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(657, 461);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 27
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(701, 461);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//use Tinderbox on Log 28
+  MoveMouse(611, 252);
+  wait(200);
+  FastClick(Mouse_left);
+  MoveMouse(745, 461);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(random(10000,11000));
+
+//click to go near bank 1
+  MoveMouse(683, 41);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(15000);
+
+//click to go near bank 2
+  MoveMouse(365, 43);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(15000);
+
+//Wait random
+  if (random(1,50)=50) then
+  begin
+    wait(random(1000,15000));
+  end;
+end;
+begin
+  initAL;
+  repeat
+    DoAll;
+    ChickenCheck;
+    wait(100);
+    ChickenCheck;
+    MimeCheck;
+  Until(False);
+end.
