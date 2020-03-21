@@ -1,0 +1,387 @@
+//Production
+//Teeb umbes 5000 Vial of Waters tunnis.
+//Have screen size fixed
+//VBO mode on
+//Graphics Minimum
+//Leave brightness as is
+//Compass centered to north
+//Screen angle top
+
+//CHANGE SETTINGS IN SETTINGS
+//Set screen mode to Fixed-screen mode and then to Resizable-screen mode.
+//Only enable VBO mode. CDL.
+//Leave brigthness as is.
+//Set private to Off.
+
+//MOVE CAMERA
+//Set camera to north.
+//Set camera to most high with w.
+//Zoom out as much as possible.
+
+//Bugs
+//Clicks outside of bank.
+//When person talks on window thinks it found yellow.
+//Hakkas barb inimest ründama. Panna attack option teiseks äkki.
+//Et teine option oleks attack ja esimene talk.
+//Monster tuli liiga hilja ja kasutaja ei näinud teda. Tahtis banka ainult korduvalt minna.
+//Panna retaliate off äkki.
+program new;
+{$i AeroLib/AeroLib.Simba}
+
+var
+  failCounter: integer;
+
+Procedure TeleToBarbGoToBank;
+begin
+    //open quest tab
+    MoveMouse(616, 216);
+    wait(1000);
+    FastClick(Mouse_left);
+
+    //click on barbarian teleport
+    MoveMouse(584, 308);
+    wait(1000);
+    FastClick(Mouse_left);
+
+    //click on yes
+    MoveMouse(266, 430);
+    wait(1000);
+    FastClick(Mouse_left);
+    wait(5000);
+
+    //click on minimap to go to bank
+    MoveMouse(622, 64);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(random(6000,7000));
+    if (random(1,50)=50) then
+    begin
+      wait(random(500,8000));
+    end;
+end;
+
+Procedure ChickenCheck;
+var
+  color_ChickenYellow : TColEx;
+  foundPnt    : TPoint;
+begin
+  color_ChickenYellow.create(11598844, 1, 1.26, 0.03);
+  if color_ChickenYellow.findIn(AREA_MM, foundPnt) then
+  begin
+    writeln('Found color ChickenYellow'+toStr(foundPnt));
+    //click on minimap
+    MoveMouse(708, 125);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(5000);
+
+    //open quest tab
+    MoveMouse(613, 216);
+    wait(1000);
+    FastClick(Mouse_left);
+
+    //click on barbarian teleport
+    MoveMouse(579, 306);
+    wait(1000);
+    FastClick(Mouse_left);
+
+    //click on yes
+    MoveMouse(267, 432);
+    wait(5000);
+    FastClick(Mouse_left);
+    wait(3000);
+
+    //click on minimap to go to bank
+    MoveMouse(619, 66);
+    wait(1000);
+    FastClick(Mouse_left);
+    wait(6000);
+  end else
+  begin
+    writeln('Didnt find color ChickenYellow');
+  end;
+end;
+
+Procedure OpenShop;
+var
+  color_ShopKeeperHeadOrange : TColEx;
+  color_ShopkeeperYellowText : TColEx;
+  color_ShopOrange : TColEx;
+  foundPnt    : TPoint;
+  var x, y: integer;
+begin
+  color_ShopKeeperHeadOrange.create(10661544, 3, 1.26, 0.03);
+  color_ShopkeeperYellowText.create(65278, 1, 1.26, 0.03);
+  color_ShopOrange.create(2070526, 1, 1.26, 0.03);
+  if color_ShopKeeperHeadOrange.findIn(AREA_MS, foundPnt) then
+  begin
+    writeln('Found color color_ShopKeeperHeadOrange'+toStr(foundPnt));
+    HumanMMouse(foundPnt, 0, 0);
+    wait(100);
+    if color_ShopkeeperYellowText.findIn(AREA_MS, foundPnt) then
+    begin
+      writeln('Found color shopkeeperYelllowText 1st time'+toStr(foundPnt));
+      FastClick(Mouse_right);
+      wait(100);
+      if color_ShopkeeperYellowText.findIn(AREA_MS, foundPnt) then
+      begin
+        writeln('Found color shopkeeperYelllowText 2nd time'+toStr(foundPnt));
+        HumanMMouse(foundPnt, 0, 0);
+        wait(100);
+        GetMousePos(x, y);
+        MoveMouse(x, y + 20);
+        wait(100);
+        FastClick(Mouse_left);
+        wait(1500);
+        if color_ShopOrange.findIn(AREA_MS, foundPnt) then
+        begin
+          writeln('Found color ShopOrange'+toStr(foundPnt));
+          wait(100);
+        end else
+        begin
+          writeln('Didnt find color ShopOrange'+toStr(foundPnt));
+          MoveMouse(637, 115);
+          wait(500);
+          FastClick(Mouse_left);
+          wait(1500);
+          writeln('failCounter'+toStr(failCounter));
+          failCounter := (failCounter + 1);
+          if (failCounter = 10) then
+          begin
+            failCounter := 0;
+            writeln('failCounter'+toStr(failCounter));
+            TeleToBarbGoToBank;
+            OpenShop;
+          end else
+          begin
+            OpenShop;
+          end;
+        end;
+      end else
+      begin
+        writeln('Didnt find color BankBlue'+toStr(foundPnt));
+        MoveMouse(637, 115);
+        wait(500);
+        FastClick(Mouse_left);
+        wait(1500);
+        writeln('failCounter'+toStr(failCounter));
+        failCounter := (failCounter + 1);
+        if (failCounter = 10) then
+        begin
+          failCounter := 0;
+          writeln('failCounter'+toStr(failCounter));
+          TeleToBarbGoToBank;
+          OpenShop;
+        end else
+        begin
+          OpenShop;
+        end;
+      end;
+    end else
+    begin
+      writeln('Didnt find color color_ShopkeeperYellowText'+toStr(foundPnt));
+      writeln('failCounter'+toStr(failCounter));
+      failCounter := (failCounter + 1);
+      if (failCounter = 10) then
+      begin
+        failCounter := 0;
+        writeln('failCounter'+toStr(failCounter));
+        TeleToBarbGoToBank;
+        OpenShop;
+      end else
+      begin
+        OpenShop;
+      end;
+    end;
+  end else
+  begin
+    writeln('Didnt find color color_ShopKeeperHeadOrange'+toStr(foundPnt));
+    MoveMouse(637, 115);
+    wait(500);
+    FastClick(Mouse_left);
+    wait(1500);
+    writeln('failCounter'+toStr(failCounter));
+    failCounter := (failCounter + 1);
+    if (failCounter = 10) then
+    begin
+      failCounter := 0;
+      writeln('failCounter'+toStr(failCounter));
+      TeleToBarbGoToBank;
+      OpenShop;
+    end else
+    begin
+      OpenShop;
+    end;
+  end;
+end;
+
+Procedure DepositeVialsOfWater;
+begin
+  //deposite vials of water
+  MoveMouse(585, 297);
+  wait(200);
+  FastClick(Mouse_right);
+  MoveMouse(585, 369);
+  wait(200);
+  FastClick(Mouse_left);
+
+  //close bank tab
+  MoveMouse(490, 47);
+  wait(200);
+  FastClick(Mouse_left);
+
+  //switch to mage tab
+  wait(200);
+  MoveMouse(753, 219);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(200);
+end;
+
+Procedure DepositeThingsInBank;
+var
+  color_BankBox : TColEx;
+  foundPnt    : TPoint;
+  var x, y : integer;
+  color_ShopkeeperYellowText : TColEx;
+  color_BankBlue : TColEx;
+  color_ShopOrange : TColEx;
+begin
+  color_BankBox.create(11382199, 1, 1.26, 0.03);
+  color_BankBlue.create(16382208, 1, 1.26, 0.03);
+  color_ShopOrange.create(2070526, 1, 1.26, 0.03);
+  if color_BankBox.findIn(AREA_MS, foundPnt) then
+  begin
+    HumanMMouse(foundPnt, 0, 0);
+    GetMousePos(x, y);
+    MoveMouse(x + 5, y + 10);
+    writeln('Found color BankBox'+toStr(foundPnt));
+    wait(300);
+    if color_BankBlue.findIn(AREA_MS, foundPnt) then
+    begin
+      writeln('Found color BankBlue'+toStr(foundPnt));
+      wait(300);
+      FastClick(Mouse_left);
+      wait(1500);
+      if color_ShopOrange.findIn(AREA_MS, foundPnt) then
+      begin
+        writeln('Found color ShopOrange'+toStr(foundPnt));
+        wait(200);
+        DepositeVialsOfWater;
+      end else
+      begin
+        writeln('Didnt find color ShopOrange'+toStr(foundPnt));
+        MoveMouse(637, 115);
+        wait(500);
+        FastClick(Mouse_left);
+        wait(1500);
+        writeln('failCounter'+toStr(failCounter));
+        failCounter := (failCounter + 1);
+        if (failCounter = 10) then
+        begin
+          failCounter := 0;
+          writeln('failCounter'+toStr(failCounter));
+          TeleToBarbGoToBank;
+          DepositeThingsInBank;
+        end else
+        begin
+          DepositeThingsInBank;
+        end;
+      end;
+    end else
+    begin
+      writeln('Didnt find color BankBlue'+toStr(foundPnt));
+      MoveMouse(637, 115);
+      wait(500);
+      FastClick(Mouse_left);
+      wait(1500);
+      writeln('failCounter'+toStr(failCounter));
+      failCounter := (failCounter + 1);
+      if (failCounter = 10) then
+      begin
+        failCounter := 0;
+        writeln('failCounter'+toStr(failCounter));
+        TeleToBarbGoToBank;
+        DepositeThingsInBank;
+      end else
+      begin
+        DepositeThingsInBank;
+      end;
+    end;
+  end else
+  begin
+    writeln('Didnt find color BankBox'+toStr(foundPnt));
+    MoveMouse(637, 115);
+    wait(500);
+    FastClick(Mouse_left);
+    wait(1500);
+    writeln('failCounter'+toStr(failCounter));
+    failCounter := (failCounter + 1);
+    if (failCounter = 10) then
+    begin
+      failCounter := 0;
+      writeln('failCounter'+toStr(failCounter));
+      TeleToBarbGoToBank;
+      DepositeThingsInBank;
+    end else
+    begin
+      DepositeThingsInBank;
+    end;
+  end;
+end;
+
+Procedure BuyFromShop;
+var
+  foundPnt    : TPoint;
+  var x, y: integer;
+begin
+  //3 repeat
+  //1 rep
+  MoveMouse(69, 117);
+  wait(100);
+  FastClick(Mouse_right);
+  MoveMouse(61, 181);
+  wait(100);
+  FastClick(Mouse_left);
+  //2 rep
+  MoveMouse(69, 117);
+  wait(100);
+  FastClick(Mouse_right);
+  MoveMouse(61, 181);
+  wait(100);
+  FastClick(Mouse_left);
+  //3 rep
+  MoveMouse(69, 117);
+  wait(100);
+  FastClick(Mouse_right);
+  MoveMouse(61, 181);
+  wait(100);
+  FastClick(Mouse_left);
+  //click on shop exit buttom
+  MoveMouse(467, 68);
+  wait(200);
+  FastClick(Mouse_left);
+  //click on magic spell
+  MoveMouse(573, 284);
+  wait(300);
+  FastClick(Mouse_left);
+  wait(random(5500,6000));
+  if(random(1,100)=100) then
+  begin
+    wait(random(1000,8000));
+  end;
+end;
+
+begin
+  initAL;
+  repeat
+    failCounter := 0;
+    DepositeThingsInBank;
+    OpenShop;
+    BuyFromShop;
+    MimeCheck;
+    ChickenCheck;
+    wait(100);
+    ChickenCheck;
+  Until(False);
+end.

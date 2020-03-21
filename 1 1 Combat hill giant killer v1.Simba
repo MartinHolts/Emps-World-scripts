@@ -1,0 +1,74 @@
+//Only have VBO MMB CDL Animation Opt on
+program new;
+//{$DEFINE SMART}
+{$i AeroLib/AeroLib.Simba}
+
+var
+  OurWords: String;
+
+Procedure ColorTest;
+var
+  color_White : TColEx;
+  foundPnt    : TPoint;
+  angle: extended;
+begin
+  color_White.create(10476799, 1, 1.26, 0.03);
+  angle := getCompassAngle();
+  Writeln(angle);
+    toggleRunning(true);
+    setAngle(ANGLE_HIGH);
+      keydown(37);
+      wait(500);
+      keyup(37);
+    CompassMovement( 60, 120, true);
+    SetAngle(RandomRange(255, 285)); // West = 270, +-15
+  if color_White.findIn(AREA_MS, foundPnt) then
+  begin
+    writeln('Found white on the minimap at '+toStr(foundPnt));
+    HumanMMouse(foundPnt, 0, 0);
+    FastClick(Mouse_left);
+    wait(3000);
+  end;
+  if not color_White.findIn(AREA_MS, foundPnt) then
+  begin
+
+      keydown(37);
+      wait(500);
+      keyup(37);
+    CompassMovement( 60, 120, true);
+  SetAngle(RandomRange(255, 285)); // West = 270, +-15
+  end;
+end;
+Procedure CollectCoins;
+var
+  color_White : TColEx;
+  foundPnt    : TPoint;
+begin
+  color_White.create(2356223, 1, 1.26, 0.03);
+  if color_White.findIn(AREA_MS, foundPnt) then
+  begin
+    writeln('Found white on the minimap at '+toStr(foundPnt));
+    HumanMMouse(foundPnt, 0, 0);
+    FastClick(Mouse_left);
+    wait(3000);
+  end;
+end;
+Procedure RotateCam;
+begin
+CompassMovement(10,180,False);
+end;
+
+begin
+  initAL;
+  OurWords := 'Hello World!';
+  Writeln(OurWords);
+  OurWords := 'Goodbye World!';
+  Writeln(OurWords);
+  RotateCam;
+  ColorTest;
+
+  repeat
+  CollectCoins;
+    ColorTest;
+  Until(False);
+end.
