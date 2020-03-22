@@ -55,37 +55,76 @@ var
 
 const
 //blood nature death water fire soul
-  OurWords = 'death';
+  OurWords = 'blood';
 //0 1 2 3 4
   NumberOfPouchesToUse = 0;
 
 Procedure TeleToBarbGoToBank;
 begin
-    //click on quest tab
-    MoveMouse(628, 256);
+    //Open quest tab
+  MoveMouse(633, 516);
+  wait(100);
+  FastClick(Mouse_left);
+
+  //Click on barbarian teleport
+  MoveMouse(609, 306);
+  wait(100);
+  FastClick(Mouse_left);
+
+  //Click on yes
+  MoveMouse(267, 466);
+  wait(500);
+  FastClick(Mouse_left);
+  //Wait for 6 second for teleporting to finish and map to load.
+  wait(9000);
+
+  //SQUARE 1
+  //top left square when north on top.
+  if (findColorTolerance(x, y, 9554646, 349, 244, 369, 273, 1)) then
+  begin
+    writeln('Found color in Square 1');
+    //Move to square in bank.
+    MoveMouse(672, 66);
     wait(100);
     FastClick(Mouse_left);
-
-    //click on barbarian teleport
-    MoveMouse(597, 343);
+  end;
+  //SQUARE 2
+  //top right square when north on top.
+  if (findColorTolerance(x, y, 9554646, 309, 242, 330, 271, 1)) then
+  begin
+    writeln('Found color in Square 2');
+    //Move to square in bank.
+    MoveMouse(667, 66);
     wait(100);
     FastClick(Mouse_left);
-
-    //click on yes
-    MoveMouse(267, 466);
-    wait(400);
+  end;
+  //SQUARE 3
+  //buttom left square when north on top.
+  if (findColorTolerance(x, y, 9554646, 351, 202, 369, 234, 1)) then
+  begin
+    writeln('Found color in Square 3');
+    //Move to square in bank.
+    MoveMouse(672, 62);
+    wait(100);
     FastClick(Mouse_left);
-    wait(5000);
-
-    //click on minimap to go to bank
+  end;
+  //SQUARE 4
+  //buttom left square when north on top.
+  if (findColorTolerance(x, y, 9554646, 310, 201, 330, 233, 1)) then
+  begin
+    writeln('Found color in Square 4');
+    //Move to square in bank.
     MoveMouse(668, 63);
     wait(100);
     FastClick(Mouse_left);
-    wait(random(7000,8000));
-    if (random(1,50)=50) then
-    begin
-      wait(random(500,8000));
-    end;
+  end;
+  //Wait for 6-7 seconds to get there.
+  wait(random(6000,7000));
+  //Wait for 1-12 seconds 1 times in 50.
+  if (random(1,50)=50) then
+  begin
+    wait(random(1000,12000));
+  end;
 end;
 
 Procedure CraftRuneAtAltarSecondTimeSoul;
