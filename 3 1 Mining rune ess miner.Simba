@@ -7,7 +7,8 @@
 //MOVE CAMERA
 //Set camera to north.
 //Set camera to most high with w.
-//Zoom out as much as possible.
+//Zoom out so much that when right left of Barbarian bank box the bottom fall
+//most bottom part is just against text chat most upper part.
 
 //SET RUN AND HAVE PICK
 //Make sure you are not sitting.
@@ -72,6 +73,9 @@ begin
 end;
 
 Procedure TeleToBarbGoToBank;
+var
+  x, y, counter: integer;
+
 begin
     //Open quest tab
     MoveMouse(629, 257);
@@ -87,12 +91,49 @@ begin
     MoveMouse(267, 466);
     wait(500);
     FastClick(Mouse_left);
-    wait(6000);
+    wait(9000);
 
-    //Move to square in bank.
-    MoveMouse(668, 63);
-    wait(100);
-    FastClick(Mouse_left);
+    //SQUARE 1
+    //top left square when north on top.
+    if (findColorTolerance(x, y, 9554646, 342, 231, 367, 266, 1)) then
+    begin
+      writeln('Found color in Square 1');
+      //Move to square in bank.
+      MoveMouse(672, 66);
+      wait(100);
+      FastClick(Mouse_left);
+    end;
+    //SQUARE 2
+    //top right square when north on top.
+    if (findColorTolerance(x, y, 9554646, 292, 231, 320, 271, 1)) then
+    begin
+      writeln('Found color in Square 2');
+      //Move to square in bank.
+      MoveMouse(667, 66);
+      wait(100);
+      FastClick(Mouse_left);
+    end;
+    //SQUARE 3
+    //buttom left square when north on top.
+    if (findColorTolerance(x, y, 9554646, 342, 183, 366, 224, 1)) then
+    begin
+      writeln('Found color in Square 3');
+      //Move to square in bank.
+      MoveMouse(672, 62);
+      wait(100);
+      FastClick(Mouse_left);
+    end;
+    //SQUARE 4
+    //buttom left square when north on top.
+    if (findColorTolerance(x, y, 9554646, 293, 183, 320, 225, 1)) then
+    begin
+      writeln('Found color in Square 4');
+      //Move to square in bank.
+      MoveMouse(668, 63);
+      wait(100);
+      FastClick(Mouse_left);
+    end;
+
     wait(random(6000,7000));
     if (random(1,50)=50) then
     begin
