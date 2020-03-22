@@ -39,17 +39,34 @@ begin
   MoveMouse(692, 186);
   wait(500);
   FastClick(Mouse_left);
-  wait(6500);
+  wait(100);
+  while ((failCounter < 65) AND (findColorTolerance(x, y, 662945, 606, 38, 775, 198, 1))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  failCounter := 0;
 
   //Click on map to move to 2 map square. To move to rune ess mine.
   MoveMouse(672, 168);
   wait(300);
   FastClick(Mouse_left);
-  wait(7000);
+  wait(100);
+  while ((failCounter < 65) AND (findColorTolerance(x, y, 662945, 606, 38, 775, 198, 1))) do
+  begin
+    wait(100);
+    failCounter := failCounter + 1;
+  end;
+  failCounter := 0;
 
   //Move mouse on top of mine entrance. If blue text appears then enter.
   MoveMouse(354, 296);
-  wait(500);
+  while ((failCounter < 10) AND not (findColorTolerance(x, y, 16776960, 0, 0, 790, 570, 0))) do
+  begin
+    wait(100);
+    failCounter := failCounter + 1;
+  end;
+  failCounter := 0;
   if (findColorTolerance(x, y, 16776960, 0, 0, 790, 570, 0)) then
   begin
     writeln('Found color MineEntranceBlueText at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
@@ -69,7 +86,12 @@ begin
   MoveMouse(423, 354);
   wait(500);
   FastClick(Mouse_left);
-  wait(20000);
+  while ((failCounter < 200) AND not (findColorTolerance(x, y, 4737358, 715, 498, 745, 532, 0))) do
+  begin
+    wait(100);
+    failCounter := failCounter + 1;
+  end;
+  failCounter := 0;
 end;
 
 Procedure TeleToBarbGoToBank;
@@ -91,7 +113,7 @@ begin
     MoveMouse(267, 466);
     wait(500);
     FastClick(Mouse_left);
-    wait(9000);
+    wait(8000);
 
     //SQUARE 1
     //top left square when north on top.
@@ -148,19 +170,19 @@ var
 begin
   while ((failCounter < 10) AND (PrecedureComplete = 0)) do
   begin
-    if (findColorTolerance(x, y, 9474460, 0, 0, 790, 570, 0)) then
+    if (findColorTolerance(x, y, 9474460, 420, 270, 467, 324, 0)) then
       begin
       writeln('Found color BankBox at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
       //Move mouse to where BankBox color was found.
       MoveMouse(x + 15, y + 10);
       wait(300);
-      if (findColorTolerance(x, y, 16776960, 0, 0, 790, 570, 0)) then
+      if (findColorTolerance(x, y, 16776960, 41, 32, 128, 47, 0)) then
       begin
         writeln('Found color BankBlue at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
         //Click on BankBox.
         FastClick(Mouse_left);
         wait(2000);
-        if (findColorTolerance(x, y, 2070783, 0, 0, 790, 570, 0)) then
+        if (findColorTolerance(x, y, 2070783, 131, 51, 373, 69, 0)) then
         begin
           writeln('Found color ShopOrange at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
           wait(100);
@@ -214,7 +236,7 @@ var
   x, y, counter: integer;
 
 begin
-  if (findColorTolerance(x, y, 11598844, 606, 38, 775, 198, 1)) then
+  if (findColorTolerance(x, y, 11009278, 606, 38, 775, 198, 0)) then
   begin
     writeln('Found color YellowArrowOnMap at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
 
