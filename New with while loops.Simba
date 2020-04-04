@@ -237,9 +237,9 @@ begin                                                                           
   writeln('Found color BankBlue at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
   FastClick(Mouse_left);
 
-
-  //Wait for shoporange
-  while ((failCounter < 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 2070783, 131, 51, 373, 69, 0))) do
+                                                                                                  //W10 131, 51, 373, 69
+  //Wait for shoporange                                                                           //Vb  136, 75, 368, 88
+  while ((failCounter < 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 2070783, 136, 75, 368, 88, 0))) do
   begin
   wait(100);
   failCounter := failCounter + 1;
