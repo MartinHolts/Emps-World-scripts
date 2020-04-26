@@ -1,0 +1,301 @@
+//CHANGE SETTINGS IN SETTINGS
+//Set screen mode to Fixed-screen mode and then to Resizable-screen mode.
+//Only enable VBO mode. CDL.
+//Leave brigthness as is.
+//Set private to Off.
+
+//MOVE CAMERA
+//Set camera to north.
+//Set camera to most high with w.
+//Zoom out so much that when right left of Barbarian bank box the bottom fall
+//most bottom part is just against text chat most upper part.
+
+//SET RUN AND HAVE PICK
+//Make sure you are not sitting.
+//Set run on.
+//Have pick equipped or in inventory. If in inventory don't put it in first place.
+//Have free space in bank for rune ess.
+//Don't wear grey colored stuff that would match with BankBox color.
+
+//BUGS
+//Doesn't find golem yellow on main screen.
+//Clicks on wisard sometimes that is on Entrance to rune essence mine.
+//Gets stuck on shopkeeper if it is one square south of me and he is next to bank box.
+//Keeps clicking on shopkeeper and if hovers over bankbox shopkeeper is in way and shows yellow top left.
+//Doesn't click on barb tele correctly if failcounter reachers 10.
+
+program new;
+{$i AeroLib/AeroLib.Simba}
+var
+  failCounter: integer;
+  PrecedureComplete: integer;
+
+Procedure EnterMineAndStartMining;
+var
+  x, y, counter: integer;
+
+begin
+  //Click on map to move to 1 map square. To move to rune ess mine.
+  MoveMouse(692, 186);
+  wait(100);
+  FastClick(Mouse_left);                                  //For Main PC 662945
+  wait(100);                                             //For Vbox 1127261
+  while ((failCounter < 70) AND (findColorTolerance(x, y, 1127261, 606, 38, 775, 198, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  wait(100);
+  failCounter := 0;
+
+  //Click on map to move to 2 map square. To move to rune ess mine.
+  MoveMouse(672, 168);
+  wait(100);
+  FastClick(Mouse_left);                                  //For Main PC 662945
+  wait(100);                                              //For Vbox 1127261
+  while ((failCounter < 65) AND (findColorTolerance(x, y, 1127261, 606, 38, 775, 198, 0))) do
+  begin
+    wait(100);
+    failCounter := failCounter + 1;
+  end;
+  failCounter := 0;
+
+  //Move mouse on top of mine entrance. If blue text appears then enter.
+  MoveMouse(354, 296);
+  wait(100);
+  while ((failCounter < 10) AND not (findColorTolerance(x, y, 16776960, 0, 0, 790, 570, 0))) do
+  begin
+    wait(100);
+    failCounter := failCounter + 1;
+  end;
+  failCounter := 0;
+  writeln('Found color MineEntranceBlueText at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
+  MoveMouse(354, 296);
+  wait(100);                                                  //For Main PC 16777215
+  FastClick(Mouse_left);                                      //For VBox 16711165
+  while ((failCounter < 50) AND not (findColorTolerance(x, y, 16711165, 350, 40, 400, 80, 0))) do
+  begin
+    wait(100);
+    failCounter := failCounter + 1;
+  end;
+  failCounter := 0;
+
+  //Click on map to move to square next to Rune Essence.
+  MoveMouse(688, 154);
+  wait(100);
+  FastClick(Mouse_left);                                 //For Main PC 662945
+  while ((failCounter < 65) AND not (findColorTolerance(x, y, 1127261, 606, 38, 775, 198, 0))) do
+  begin
+    wait(100);
+    failCounter := failCounter + 1;
+  end;
+  failCounter := 0                                             //For VBox 1127261
+  while ((failCounter < 65) AND (findColorTolerance(x, y, 1127261, 606, 38, 775, 198, 0))) do
+  begin
+    wait(100);
+    failCounter := failCounter + 1;
+  end;
+  failCounter := 0;
+
+
+  //Move mouse on top of Rune Essence. If blue text appears then click on it.
+  MoveMouse(431, 355);
+  wait(100);
+  while ((failCounter < 50) AND not (findColorTolerance(x, y, 16776960, 0, 0, 790, 570, 0))) do
+  begin
+    wait(100);
+    failCounter := failCounter + 1;
+  end;
+  failCounter := 0;
+  FastClick(Mouse_left);
+                                                              //For Main PC 4737358
+  //Wait until last spot of inv has rune ess in it.           //For Vbox 8224132
+  while ((failCounter < 200) AND not (findColorTolerance(x, y, 8224132, 715, 498, 745, 532, 0))) do
+  begin
+    wait(100);
+    failCounter := failCounter + 1;
+  end;
+  failCounter := 0;
+end;
+
+Procedure TeleToBarbGoToBank;
+var
+  x, y, counter: integer;
+
+begin
+    //Open quest tab
+    MoveMouse(629, 257);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(100);
+
+    //Click on barbarian teleport
+    MoveMouse(598, 344);
+    wait(100);
+    FastClick(Mouse_left);
+    wait(100);
+
+    //Click on yes
+    wait(400);
+    MoveMouse(267, 466);
+    FastClick(Mouse_left);
+
+    while (
+            ((failCounter < 80) AND not (findColorTolerance(x, y, 9554646, 342, 231, 367, 266, 0))) OR
+            ((failCounter < 80) AND not (findColorTolerance(x, y, 9554646, 292, 231, 320, 271, 0))) OR
+            ((failCounter < 80) AND not (findColorTolerance(x, y, 9554646, 342, 183, 366, 224, 0))) OR
+            ((failCounter < 80) AND not (findColorTolerance(x, y, 9554646, 293, 183, 320, 225, 0)))
+          ) do
+    begin
+      wait(100);
+      failCounter := failCounter + 1;
+    end;
+    failCounter := 0;
+
+    //SQUARE 1                           //For Main PC 9554646  342, 231, 367, 266
+    //top left square when north on top. //For Vbox 7311511
+    if (findColorTolerance(x, y, 7509147, 340, 222, 362, 269, 1)) then
+    begin
+      writeln('Found color in Square 1');
+      //Move to square in bank.
+      MoveMouse(672, 66);
+      wait(100);
+      FastClick(Mouse_left);
+    end;
+    //SQUARE 2                  //For Main PC  292, 231, 320, 271
+    //top right square when north on top.
+    if (findColorTolerance(x, y, 7509147, 288, 220, 314, 269, 1)) then
+    begin
+      writeln('Found color in Square 2');
+      //Move to square in bank.
+      MoveMouse(668, 66);
+      wait(100);
+      FastClick(Mouse_left);
+    end;
+    //SQUARE 3                      //For Main PC    342, 183, 366, 224
+    //buttom left square when north on top.
+    if (findColorTolerance(x, y, 7509147, 341, 178, 362, 225, 1)) then
+    begin
+      writeln('Found color in Square 3');
+      //Move to square in bank.
+      MoveMouse(672, 62);
+      wait(100);
+      FastClick(Mouse_left);
+    end;
+    //SQUARE 4
+    //buttom left square when north on top.   //For Main PC 293, 183, 320, 225
+    if (findColorTolerance(x, y, 7509147, 290, 177, 315, 224, 1)) then
+    begin
+      writeln('Found color in Square 4');
+      //Move to square in bank.
+      MoveMouse(668, 63);
+      wait(100);
+      FastClick(Mouse_left);
+    end;
+
+    wait(100);
+    while ((failCounter < 65) AND (findColorTolerance(x, y, 662945, 606, 38, 775, 198, 0))) do
+    begin
+    wait(100);
+    failCounter := failCounter + 1;
+    end;
+    wait(9000);
+    failCounter := 0;
+
+    wait(random(10,1000));
+    if (random(1,50)=50) then
+    begin
+      wait(random(1000,12000));
+    end;
+end;
+
+Procedure DepositeThingsInBank;
+var
+  x, y, counter: integer;
+                                                                                          //For Vbox 7829374  419, 253, 473, 328,
+begin                                                                                     //For main PC 9474460 420, 270, 467, 324
+  while ((failCounter < 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 7829374, 419, 253, 473, 328, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  failCounter := 0;
+
+  //Move mouse to where BankBox color was found.
+  writeln('Found color BankBox at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
+  MoveMouse(x, y + 5);
+                                                                                    //For main PC 16776960
+  //Wait for blue text.                                                             //For vbox 16776960
+  while ((failCounter < 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 16776960, 41, 32, 128, 47, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  failCounter := 0;
+
+  //Click on BankBox.
+  writeln('Found color BankBlue at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
+  FastClick(Mouse_left);
+
+                                                                                                  //W10 131, 51, 373, 69
+  //Wait for shoporange                                                                           //Vb  136, 75, 368, 88
+  while ((failCounter < 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 2070783, 136, 75, 368, 88, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  failCounter := 0;
+  writeln('Found color ShopOrange at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
+
+  //Deposite rune ess.
+  MoveMouse(601, 298);
+  wait(200);
+  FastClick(Mouse_right);
+  GetMousePos(x, y);
+  MoveMouse(x, y + 74);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(200);
+
+  PrecedureComplete := 1;
+end;
+
+Procedure GolemCheck;
+var
+  x, y, counter: integer;
+                               //For Win 10 normal PC 11009278
+begin                          //For Vbox win 10 8125181 //For Vbox  8125181
+  if (findColorTolerance(x, y, 8125181, 606, 38, 775, 198, 0)) then
+  begin
+    writeln('Found color YellowArrowOnMap at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
+
+    //Click on map to run from Golem.
+    MoveMouse(739, 68);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(6000);
+  end else
+  begin
+    writeln('Didnt find color YellowArrowOnMap');
+  end;
+end;
+
+begin
+  initAL;
+  repeat
+  EnterMineAndStartMining;
+  GolemCheck;
+  wait(150);
+  GolemCheck;
+  wait(150);
+  GolemCheck;
+  TeleToBarbGoToBank;
+  DepositeThingsInBank
+  if (PrecedureComplete = 0) then
+  begin
+    TeleToBarbGoToBank;
+    DepositeThingsInBank
+  end;
+  PrecedureComplete := 0
+  Until(False);
+end.
