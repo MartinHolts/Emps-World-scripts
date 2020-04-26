@@ -1,28 +1,53 @@
-//CHANGE SETTINGS IN SETTINGS
+//SCRIPT OUTPUTS
+// Time to complete one script loop. 1:35
+// XP
+// Gives     7 852 xp    in one script loop.
+// Gives   297 549 xp    in one hour.
+// ITEMS
+// Gives        26 coals in one script loop.
+// Gives       985 coals in one hour.
+// Money
+// Gives    75 400 coins in one script loop.
+// Gives 2 857 263 coins in one hour.
+// In case coal price is 2900 coins.
+
+//1 SETTINGS SETTINGS
 //Set screen mode to Fixed-screen mode and then to Resizable-screen mode.
 //Only enable VBO mode. CDL.
 //Leave brigthness as is.
-//Set private to Off.
+//Set Screen size to (790 570)
 
-//MOVE CAMERA
+//2 SETTINGS CAMERA
 //Set camera to north.
 //Set camera to most high with w.
-//Zoom out so much that when right left of Barbarian bank box the bottom fall
-//most bottom part is just against text chat most upper part.
+//Zoom out as much as possible.
 
-//SET RUN AND HAVE PICK
+//3 SETTINGS INGAME PERMANENT
+//ANTIPLAYER
+//Set accept aid to off.
+//NPC ATTACK
+//Set NPC option priority to off.
+//Set retaliate to off.
+//COLOR FINDING
+//Set private to off.
+//Set disable public chat effects to on.
+
+//4 SETTINGS INGAME TEMPORARY
+//Be left of barbarian bank chest and near it before starting script.
 //Make sure you are not sitting.
 //Set run on.
-//Have pick equipped or in inventory. If in inventory don't put it in first place.
-//Have free space in bank for rune ess.
-//Don't wear grey colored stuff that would match with BankBox color.
+//Have rune ess in first place in bank.
+//Have Puches in first place in inventory. Most left and top row.
+//Have talisman in inventory. Don't have in place where poches would be.
+//Enter in the scipt what runes you want to make and how many pouches you have in inverntory.
+//settingute alt võtta ära NPC option priority
 
 //BUGS
-//Doesn't find golem yellow on main screen.
-//Clicks on wisard sometimes that is on Entrance to rune essence mine.
-//Gets stuck on shopkeeper if it is one square south of me and he is next to bank box.
-//Keeps clicking on shopkeeper and if hovers over bankbox shopkeeper is in way and shows yellow top left.
-//Doesn't click on barb tele correctly if failcounter reachers 10.
+//COLOR
+//Doesn't find back box sometimes and misclassifies the color as somebodies equipment or Barbarian axe.
+//TIMING
+//Doesn't deposite all rune ess sometimes into pouches.
+//Doesn't undeposite all rune ess sometimes from pouches.
 
 program new;
 {$i AeroLib/AeroLib.Simba}
@@ -70,8 +95,6 @@ begin
   end;
   failCounter := 0;
   writeln('Found color MineEntranceBlueText at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
-  MoveMouse(354, 296);
-  wait(100);
   FastClick(Mouse_left);
   while ((failCounter < 50) AND not (findColorTolerance(x, y, 16777215, 350, 40, 400, 80, 0))) do
   begin
@@ -118,90 +141,95 @@ var
   x, y, counter: integer;
 
 begin
-    //Open quest tab
-    MoveMouse(629, 257);
-    wait(100);
-    FastClick(Mouse_left);
-    wait(100);
+  //Open quest tab
+  MoveMouse(629, 257);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(100);
 
-    //Click on barbarian teleport
-    MoveMouse(598, 344);
-    wait(100);
-    FastClick(Mouse_left);
-    wait(100);
+  //Click on barbarian teleport
+  MoveMouse(598, 344);
+  wait(100);
+  FastClick(Mouse_left);
+  wait(100);
 
-    //Click on yes
-    wait(400);
-    MoveMouse(267, 466);
-    FastClick(Mouse_left);
+  //Click on yes
+  wait(400);
+  MoveMouse(267, 466);
+  FastClick(Mouse_left);
 
-    while (
-            ((failCounter < 80) AND not (findColorTolerance(x, y, 9554646, 342, 231, 367, 266, 0))) OR
-            ((failCounter < 80) AND not (findColorTolerance(x, y, 9554646, 292, 231, 320, 271, 0))) OR
-            ((failCounter < 80) AND not (findColorTolerance(x, y, 9554646, 342, 183, 366, 224, 0))) OR
-            ((failCounter < 80) AND not (findColorTolerance(x, y, 9554646, 293, 183, 320, 225, 0)))
-          ) do
-    begin
-      wait(100);
-      failCounter := failCounter + 1;
-    end;
-    failCounter := 0;
-
-    //SQUARE 1
-    //top left square when north on top.
-    if (findColorTolerance(x, y, 9554646, 342, 231, 367, 266, 1)) then
-    begin
-      writeln('Found color in Square 1');
-      //Move to square in bank.
-      MoveMouse(672, 66);
-      wait(100);
-      FastClick(Mouse_left);
-    end;
-    //SQUARE 2
-    //top right square when north on top.
-    if (findColorTolerance(x, y, 9554646, 292, 231, 320, 271, 1)) then
-    begin
-      writeln('Found color in Square 2');
-      //Move to square in bank.
-      MoveMouse(667, 66);
-      wait(100);
-      FastClick(Mouse_left);
-    end;
-    //SQUARE 3
-    //buttom left square when north on top.
-    if (findColorTolerance(x, y, 9554646, 342, 183, 366, 224, 1)) then
-    begin
-      writeln('Found color in Square 3');
-      //Move to square in bank.
-      MoveMouse(672, 62);
-      wait(100);
-      FastClick(Mouse_left);
-    end;
-    //SQUARE 4
-    //buttom left square when north on top.
-    if (findColorTolerance(x, y, 9554646, 293, 183, 320, 225, 1)) then
-    begin
-      writeln('Found color in Square 4');
-      //Move to square in bank.
-      MoveMouse(668, 63);
-      wait(100);
-      FastClick(Mouse_left);
-    end;
-
-    wait(100);
-    while ((failCounter < 65) AND (findColorTolerance(x, y, 662945, 606, 38, 775, 198, 0))) do
-    begin
+  while (
+          ((failCounter <= 80) AND not (findColorTolerance(x, y, 9554646, 342, 231, 367, 266, 0))) OR
+          ((failCounter <= 80) AND not (findColorTolerance(x, y, 9554646, 292, 231, 320, 271, 0))) OR
+          ((failCounter <= 80) AND not (findColorTolerance(x, y, 9554646, 342, 183, 366, 224, 0))) OR
+          ((failCounter <= 80) AND not (findColorTolerance(x, y, 9554646, 293, 183, 320, 225, 0)))
+        ) do
+  begin
     wait(100);
     failCounter := failCounter + 1;
-    end;
-    wait(100);
-    failCounter := 0;
-
-    wait(random(10,1000));
-    if (random(1,50)=50) then
+    if (failCounter = 80) then
     begin
-      wait(random(1000,12000));
+      writeln('Didn't find color in any square after teleing Barbarian village');
     end;
+  end;
+  failCounter := 0;
+
+  //SQUARE 1
+  //top left square when north on top.
+  if (findColorTolerance(x, y, 9554646, 342, 231, 367, 266, 1)) then
+  begin
+    writeln('Found color in Square 1');
+    //Move to square in bank.
+    MoveMouse(672, 66);
+    wait(100);
+    FastClick(Mouse_left);
+  end;
+  //SQUARE 2
+  //top right square when north on top.
+  if (findColorTolerance(x, y, 9554646, 292, 231, 320, 271, 1)) then
+  begin
+    writeln('Found color in Square 2');
+    //Move to square in bank.
+    MoveMouse(667, 66);
+    wait(100);
+    FastClick(Mouse_left);
+  end;
+  //SQUARE 3
+  //buttom left square when north on top.
+  if (findColorTolerance(x, y, 9554646, 342, 183, 366, 224, 1)) then
+  begin
+    writeln('Found color in Square 3');
+    //Move to square in bank.
+    MoveMouse(672, 62);
+    wait(100);
+    FastClick(Mouse_left);
+  end;
+  //SQUARE 4
+  //buttom left square when north on top.
+  if (findColorTolerance(x, y, 9554646, 293, 183, 320, 225, 1)) then
+  begin
+    writeln('Found color in Square 4');
+    //Move to square in bank.
+    MoveMouse(668, 63);
+    wait(100);
+    FastClick(Mouse_left);
+  end;
+  wait(100);
+
+  //Wait while you get to bank.
+  while ((failCounter < 65) AND (findColorTolerance(x, y, 662945, 606, 38, 775, 198, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  wait(100);
+  failCounter := 0;
+
+  wait(random(10,1000));
+  if (random(1,50)=50) then
+  begin
+    wait(random(1000,12000));
+  end;
 end;
 
 Procedure DepositeThingsInBank;

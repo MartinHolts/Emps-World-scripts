@@ -52,79 +52,214 @@ program new;
 {$i AeroLib/AeroLib.Simba}
 var
   failCounter: integer;
+  PrecedureComplete: integer;
 
 const
 //blood nature death water fire soul
-  OurWords = 'blood';
+  OurWords = 'nature';
 //0 1 2 3 4
-  NumberOfPouchesToUse = 0;
+  NumberOfPouchesToUse = 3;
 
-Procedure TeleToBarbGoToBank;
+Procedure DepositeThingsInBank;
+var
+  x, y, counter: integer;
+
 begin
-    //Open quest tab
-  MoveMouse(633, 516);
+  //Wait for bankbox color
+  while ((failCounter <= 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 9474460, 420, 270, 467, 324, 0))) do
+  begin
+    wait(100);
+    failCounter := failCounter + 1;
+  end;
+  if (failCounter = 65) then
+  begin
+    writeln('Didnt find color BankBox');
+  end;
+  failCounter := 0;
+
+  //Move mouse to where BankBox color was found.
+  writeln('Found color BankBox at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
+  MoveMouse(x + 15, y + 10);
+
+  //Wait for blue text.
+  while ((failCounter <= 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 16776960, 41, 32, 128, 47, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  if (failCounter = 65) then
+  begin
+    writeln('Didnt find color BankBlue');
+  end;
+  failCounter := 0;
+
+  //Click on BankBox.
+  writeln('Found color BankBlue at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
+  FastClick(Mouse_left);
+
+
+  //Wait for shoporange
+  while ((failCounter <= 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 2070783, 131, 51, 373, 69, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  if (failCounter = 65) then
+  begin
+    writeln('Didnt find color ShopOrange');
+  end;
+  failCounter := 0;
+  writeln('Found color ShopOrange at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
+
+  PrecedureComplete := 1;
+end;
+
+Procedure PickEss;
+var
+  x, y, counter: integer;
+
+begin
+  //Withdraw rune ess
+  MoveMouse(57, 132);
+  wait(100);
+  FastClick(Mouse_right);
+  MoveMouse(95, 214);
+  wait(200);
+  FastClick(Mouse_left);
+
+  //close bank tab
+  MoveMouse(493, 62);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(1000);
+
+  //Wait for bank to close
+  while ((failCounter <= 65) AND (findColorTolerance(x, y, 2070783, 131, 51, 373, 69, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  if (failCounter = 65) then
+  begin
+    writeln('Bank wasnt closed');
+  end;
+  failCounter := 0;
+end;
+
+Procedure PutEssInPouches;
+begin
+
+  //Fill pouch 1
+  if (NumberOfPouchesToUse >= 1) then
+  begin
+    MoveMouse(600, 300);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(100);
+  end;
+
+  //Fill pouch 2
+  if (NumberOfPouchesToUse >= 2) then
+  begin
+    MoveMouse(645, 306);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(100);
+  end;
+
+  //Fill pouch 3
+  if (NumberOfPouchesToUse >= 3) then
+  begin
+    MoveMouse(685, 304);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(100);
+  end;
+
+  //Fill pouch 4
+  if (NumberOfPouchesToUse >= 4) then
+  begin
+    MoveMouse(728, 305);
+    wait(200);
+    FastClick(Mouse_left);
+    wait(100);
+  end;
+end;
+
+Procedure GoToAltar;
+var
+  x, y, counter: integer;
+
+begin
+  //Click 1 on minimap
+  MoveMouse(619, 87);
   wait(100);
   FastClick(Mouse_left);
+  //Wait while red flag appears.                           //Main PC Win 10
+  while ((failCounter <= 65) AND (Not findColorTolerance(x, y, 662945, 606, 38, 775, 198, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  wait(100);
+  failCounter := 0;
 
-  //Click on barbarian teleport
-  MoveMouse(609, 306);
+  //Wait while red flag disapears.                      //Main PC Win 10
+  while ((failCounter <= 65) AND (findColorTolerance(x, y, 662945, 606, 38, 775, 198, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  wait(100);
+  failCounter := 0;
+
+  wait(1000);
+
+  //Click 2 on minimap
+  MoveMouse(631, 81);
   wait(100);
   FastClick(Mouse_left);
+  //Wait while red flag appears.                           //Main PC Win 10
+  while ((failCounter <= 65) AND (Not findColorTolerance(x, y, 662945, 606, 38, 775, 198, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  wait(100);
+  failCounter := 0;
 
-  //Click on yes
-  MoveMouse(267, 466);
-  wait(500);
+  //Wait while red flag disapears.                           //Main PC Win 10
+  while ((failCounter <= 65) AND (findColorTolerance(x, y, 662945, 606, 38, 775, 198, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  wait(100);
+  failCounter := 0;
+end;
+
+Procedure EnterAltar;
+var
+  x, y, counter: integer;
+
+begin
+  //Move mouse on top of Altar entrance. If blue text appears then enter.
+  MoveMouse(309, 325);
+  wait(100);
+  while ((failCounter <= 30) AND not (findColorTolerance(x, y, 16776960, 0, 0, 790, 570, 0))) do
+  begin
+    wait(100);
+    failCounter := failCounter + 1;
+  end;
+  if (failCounter = 30) then
+  begin
+    writeln('Didnt find blue text near altar');
+  end;
+  failCounter := 0;
+  writeln('Found color Altar BlueText at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
   FastClick(Mouse_left);
-  //Wait for 6 second for teleporting to finish and map to load.
-  wait(9000);
 
-  //SQUARE 1
-  //top left square when north on top.
-  if (findColorTolerance(x, y, 9554646, 349, 244, 369, 273, 1)) then
-  begin
-    writeln('Found color in Square 1');
-    //Move to square in bank.
-    MoveMouse(672, 66);
-    wait(100);
-    FastClick(Mouse_left);
-  end;
-  //SQUARE 2
-  //top right square when north on top.
-  if (findColorTolerance(x, y, 9554646, 309, 242, 330, 271, 1)) then
-  begin
-    writeln('Found color in Square 2');
-    //Move to square in bank.
-    MoveMouse(667, 66);
-    wait(100);
-    FastClick(Mouse_left);
-  end;
-  //SQUARE 3
-  //buttom left square when north on top.
-  if (findColorTolerance(x, y, 9554646, 351, 202, 369, 234, 1)) then
-  begin
-    writeln('Found color in Square 3');
-    //Move to square in bank.
-    MoveMouse(672, 62);
-    wait(100);
-    FastClick(Mouse_left);
-  end;
-  //SQUARE 4
-  //buttom left square when north on top.
-  if (findColorTolerance(x, y, 9554646, 310, 201, 330, 233, 1)) then
-  begin
-    writeln('Found color in Square 4');
-    //Move to square in bank.
-    MoveMouse(668, 63);
-    wait(100);
-    FastClick(Mouse_left);
-  end;
-  //Wait for 6-7 seconds to get there.
-  wait(random(6000,7000));
-  //Wait for 1-12 seconds 1 times in 50.
-  if (random(1,50)=50) then
-  begin
-    wait(random(1000,12000));
-  end;
+  wait(5000);
 end;
 
 Procedure CraftRuneAtAltarSecondTimeSoul;
@@ -177,14 +312,18 @@ begin
 end;
 
 Procedure EmptyPouches;
+var
+  x, y : integer;
+
 begin
   //Empty pouch 1
   if (NumberOfPouchesToUse >= 1) then
   begin
-    MoveMouse(613, 256);
+    MoveMouse(600, 300);
     wait(100);
     FastClick(Mouse_right);
-    MoveMouse(605, 300);
+    GetMousePos(x, y);
+    MoveMouse(x, y + 45);
     wait(100);
     FastClick(Mouse_left);
   end;
@@ -192,10 +331,11 @@ begin
   //Empty pouch 2
   if (NumberOfPouchesToUse >= 2) then
   begin
-    MoveMouse(653, 256);
+    MoveMouse(645, 306);
     wait(100);
     FastClick(Mouse_right);
-    MoveMouse(653, 300);
+    GetMousePos(x, y);
+    MoveMouse(x, y + 45);
     wait(100);
     FastClick(Mouse_left);
   end;
@@ -203,10 +343,11 @@ begin
   //Empty pouch 3
   if (NumberOfPouchesToUse >= 3) then
   begin
-    MoveMouse(697, 256);
+    MoveMouse(685, 304);
     wait(100);
     FastClick(Mouse_right);
-    MoveMouse(697, 300);
+    GetMousePos(x, y);
+    MoveMouse(x, y + 45);
     wait(100);
     FastClick(Mouse_left);
   end;
@@ -214,10 +355,11 @@ begin
   //Empty pouch 4
   if (NumberOfPouchesToUse >= 4) then
   begin
-    MoveMouse(742, 256);
+    MoveMouse(728, 305);
     wait(100);
     FastClick(Mouse_right);
-    MoveMouse(742, 300);
+    GetMousePos(x, y);
+    MoveMouse(x, y + 45);
     wait(100);
     FastClick(Mouse_left);
   end;
@@ -291,194 +433,133 @@ begin
   wait(500);
 end;
 
-Procedure EnterAltar;
-begin
-  //Click on Altar
-  MoveMouse(309, 325);
-  wait(100);
-  FastClick(Mouse_left);
-  wait(5000);
-end;
-
-Procedure GoToAltar;
-begin
-  //Click 1 on minimap
-  MoveMouse(619, 87);
-  wait(100);
-  FastClick(Mouse_left);
-  wait(8000);
-
-  //Click 2 on minimap
-  MoveMouse(631, 81);
-  wait(100);
-  FastClick(Mouse_left);
-  wait(6000);
-end;
-
-Procedure PickEss;
-begin
-  //Withdraw rune ess
-  MoveMouse(57, 132);
-  wait(100);
-  FastClick(Mouse_right);
-  MoveMouse(95, 214);
-  wait(200);
-  FastClick(Mouse_left);
-
-  //close bank tab
-  MoveMouse(493, 62);
-  wait(200);
-  FastClick(Mouse_left);
-end;
-
-Procedure PutEssInPouches;
-begin
-
-  //Fill pouch 1
-  if (NumberOfPouchesToUse >= 1) then
-  begin
-    MoveMouse(613, 256);
-    wait(200);
-    FastClick(Mouse_left);
-    wait(100);
-  end;
-
-  //Fill pouch 2
-  if (NumberOfPouchesToUse >= 2) then
-  begin
-    MoveMouse(653, 260);
-    wait(200);
-    FastClick(Mouse_left);
-    wait(100);
-  end;
-
-  //Fill pouch 3
-  if (NumberOfPouchesToUse >= 3) then
-  begin
-    MoveMouse(697, 260);
-    wait(200);
-    FastClick(Mouse_left);
-    wait(100);
-  end;
-
-  //Fill pouch 4
-  if (NumberOfPouchesToUse >= 4) then
-  begin
-    MoveMouse(742, 258);
-    wait(200);
-    FastClick(Mouse_left);
-    wait(100);
-  end;
-end;
-
-Procedure DepositeThingsInBank;
+Procedure TeleToBarbGoToBank;
 var
   x, y : integer;
-  foundPnt    : TPoint;
-  color_BankBox : TColEx;
-  color_BankBlue : TColEx;
-  color_ShopOrange : TColEx;
+
 begin
-  color_BankBox.create(9079444, 1, 1.26, 0.03);
-  color_BankBlue.create(16579584, 1, 1.26, 0.03);
-  color_ShopOrange.create(2070783, 1, 1.26, 0.03);
-  if color_BankBox.findIn(AREA_MS, foundPnt) then
+  //Open quest tab
+  MoveMouse(629, 257);
+  wait(100);
+  FastClick(Mouse_left);
+
+  //Click on barbarian teleport
+  MoveMouse(598, 344);
+  wait(100);
+  FastClick(Mouse_left);
+
+  //Click on yes
+  MoveMouse(267, 466);
+  wait(1000);
+  FastClick(Mouse_left);
+
+  while (
+          ((failCounter <= 80) AND not (findColorTolerance(x, y, 9554646, 342, 231, 367, 266, 0))) OR
+          ((failCounter <= 80) AND not (findColorTolerance(x, y, 9554646, 292, 231, 320, 271, 0))) OR
+          ((failCounter <= 80) AND not (findColorTolerance(x, y, 9554646, 342, 183, 366, 224, 0))) OR
+          ((failCounter <= 80) AND not (findColorTolerance(x, y, 9554646, 293, 183, 320, 225, 0)))
+        ) do
   begin
-    writeln('Found color BankBox'+toStr(foundPnt));
-    HumanMMouse(foundPnt, 0, 0);
-    GetMousePos(x, y);
-    MoveMouse(x + 13, y + 15);
-    wait(300);
-    if color_BankBlue.findIn(AREA_MS, foundPnt) then
+    wait(100);
+    failCounter := failCounter + 1;
+    if (failCounter = 80) then
     begin
-      writeln('Found color BankBlue'+toStr(foundPnt));
-      FastClick(Mouse_left);
-      wait(1500);
-      if color_ShopOrange.findIn(AREA_MS, foundPnt) then
-      begin
-        writeln('Found color ShopOrange'+toStr(foundPnt));
-        wait(200);
-      end else
-      begin
-        writeln('Didnt find color ShopOrange');
-        MoveMouse(684, 118);
-        wait(500);
-        FastClick(Mouse_left);
-        wait(1500);
-        writeln('failCounter'+toStr(failCounter));
-        failCounter := (failCounter + 1);
-        if (failCounter = 10) then
-        begin
-          failCounter := 0;
-          writeln('failCounter in if'+toStr(failCounter));
-          TeleToBarbGoToBank;
-          DepositeThingsInBank;
-        end else
-        begin
-          DepositeThingsInBank;
-        end;
-      end;
-    end else
-    begin
-      writeln('Didnt find color BankBlue');
-      MoveMouse(684, 118);
-      wait(500);
-      FastClick(Mouse_left);
-      wait(1500);
-      writeln('failCounter'+toStr(failCounter));
-      failCounter := (failCounter + 1);
-      if (failCounter = 10) then
-      begin
-        failCounter := 0;
-        writeln('failCounter in if'+toStr(failCounter));
-        TeleToBarbGoToBank;
-        DepositeThingsInBank;
-      end else
-      begin
-        DepositeThingsInBank;
-      end;
+        writeln('Didnt find color in any square after teleing Barbarian village');
     end;
-  end else
+  end;
+  failCounter := 0;
+
+  //SQUARE 1
+  //top left square when north on top.
+  if (findColorTolerance(x, y, 9554646, 342, 231, 367, 266, 1)) then
   begin
-    writeln('Didnt find color BankBox');
-    MoveMouse(684, 118);
-    wait(500);
+    writeln('Found color in Square 1');
+    //Move to square in bank.
+    MoveMouse(672, 66);
+    wait(100);
     FastClick(Mouse_left);
-    wait(1500);
-    writeln('failCounter'+toStr(failCounter));
-    failCounter := (failCounter + 1);
-    if (failCounter = 10) then
-    begin
-      failCounter := 0;
-      writeln('failCounter in if'+toStr(failCounter));
-      TeleToBarbGoToBank;
-      DepositeThingsInBank;
-    end else
-    begin
-      DepositeThingsInBank;
-    end;
+  end;
+  //SQUARE 2
+  //top right square when north on top.
+  if (findColorTolerance(x, y, 9554646, 292, 231, 320, 271, 1)) then
+  begin
+    writeln('Found color in Square 2');
+    //Move to square in bank.
+    MoveMouse(667, 66);
+    wait(100);
+    FastClick(Mouse_left);
+  end;
+  //SQUARE 3
+  //buttom left square when north on top.
+  if (findColorTolerance(x, y, 9554646, 342, 183, 366, 224, 1)) then
+  begin
+    writeln('Found color in Square 3');
+    //Move to square in bank.
+    MoveMouse(672, 62);
+    wait(100);
+    FastClick(Mouse_left);
+  end;
+  //SQUARE 4
+  //buttom left square when north on top.
+  if (findColorTolerance(x, y, 9554646, 293, 183, 320, 225, 1)) then
+  begin
+    writeln('Found color in Square 4');
+    //Move to square in bank.
+    MoveMouse(668, 63);
+    wait(100);
+    FastClick(Mouse_left);
+  end;
+
+  //Wait while red flag appears.                           //Main PC Win 10
+  while ((failCounter <= 65) AND (Not findColorTolerance(x, y, 662945, 606, 38, 775, 198, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  wait(100);
+  failCounter := 0;
+
+  //Wait while you get to bank.                           //Main PC Win 10
+  while ((failCounter <= 65) AND (findColorTolerance(x, y, 662945, 606, 38, 775, 198, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  wait(100);
+  failCounter := 0;
+
+  wait(random(10,1000));
+  if (random(1,50)=50) then
+  begin
+    wait(random(1000,12000));
   end;
 end;
 
 begin
   initAL;
   repeat
+    PrecedureComplete := 0;
     DepositeThingsInBank;
+
+    if (PrecedureComplete = 0) then
+    begin
+      TeleToBarbGoToBank;
+      DepositeThingsInBank
+    end;
+    PrecedureComplete := 0;
+
     PickEss;
-    if (NumberOfPouchesToUse > 0) then
+
+    if (NumberOfPouchesToUse >= 1) then
     begin
       PutEssInPouches;
-    end;
-      if (NumberOfPouchesToUse > 0) then
-    begin
       DepositeThingsInBank;
-    end;
-      if (NumberOfPouchesToUse > 0) then
-    begin
       PickEss;
     end;
+
     GoToAltar;
     EnterAltar;
+
     //blood
     if (OurWords = 'blood') then
     begin
@@ -540,7 +621,7 @@ begin
         CraftRuneAtAltarSecondTimeSoul;
       end;
     end;
+
     TeleToBarbGoToBank;
-    failCounter := 0;
   Until(False);
 end.

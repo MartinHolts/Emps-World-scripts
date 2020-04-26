@@ -41,45 +41,34 @@ program new;
 var
   failCounter: integer;
   foundGolem: integer;
+  PrecedureComplete: integer;
 
 Procedure GolemCheck;
 var
-  color_YellowArrowOnMap : TColEx;
   x, y, counter: integer;
-begin
-  color_YellowArrowOnMap.create(5241596, 1, 1.26, 0.03);
-  //  if color_YellowArrowOnMap.findIn(AREA_MM, foundPnt) then             //606 38 775 198
-  if (findColorTolerance(x, y, 5241596, 606, 38, 775, 198, 1)) then
+begin                           //For Main PC 11009278  Works
+  //Wait for YellowArrowOnMap
+  while ((failCounter <= 5) AND not (findColorTolerance(x, y, 11009278, 606, 38, 775, 198, 1))) do
   begin
-  //  writeln('Found color color_YellowArrowOnMap'+toStr(foundPnt));
-    writeln('Found color color_YellowArrowOnMap');
+    wait(100);
+    failCounter := failCounter + 1;
+  end;
+  if (failcounter <= 4) then
+  begin
+    writeln('Found color YellowArrowOnMap');
     foundGolem := 1;
+
     //click on minimap
     MoveMouse(739, 68);
     wait(200);
     FastClick(Mouse_left);
-    wait(6000);
-
-    //open quest tab
-    MoveMouse(633, 516);
-    wait(1000);
-    FastClick(Mouse_left);
-
-    //click on barbarian teleport
-    MoveMouse(609, 306);
-    wait(1000);
-    FastClick(Mouse_left);
-
-    //click on yes
-    MoveMouse(267, 466);
-    wait(500);
-    FastClick(Mouse_left);
-    wait(6000);
-
+    wait(7000);
   end else
   begin
-    writeln('Didnt find color color_YellowArrowOnMap');
+    writeln('Didnt find color YellowArrowOnMap');
   end;
+  failCounter := 0;
+
 end;
 
 Procedure TeleToBarbGoToBank;
@@ -245,121 +234,70 @@ end;
 
 Procedure DepositeThingsInBank;
 var
-  color_BankBox : TColEx;
-  foundPnt    : TPoint;
   x, y, counter: integer;
-  color_ShopkeeperYellowText : TColEx;
-  color_BankBlue : TColEx;
-  color_ShopOrange : TColEx;
+
 begin
-  color_BankBox.create(9474460, 1, 1.26, 0.03);
-  color_BankBlue.create(16711168, 1, 1.26, 0.03);
-  color_ShopOrange.create(2070783, 1, 1.26, 0.03);
-  //Find BankBox color
-  //if color_BankBox.findIn(AREA_MS, foundPnt) then
-  if (findColorTolerance(x, y, 9211030, 421, 285, 455, 317, 1)) then
+  //Wait for BankBox
+  while ((failCounter <= 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 9474460, 420, 270, 467, 324, 0))) do
   begin
-    //Write that BankBox color was found and where it was found.
-    writeln('Found color BankBox'+toStr(foundPnt));
-    //Move mouse to where BankBox color was found.
-    //HumanMMouse(foundPnt, 0, 0);
-    MoveMouse(443, 300);
-    //Get mouse position at that point.
-    GetMousePos(x, y);
-    //Move mouse 15 pixels right and 10 pixels buttom.
-    MoveMouse(x + 15, y + 10);
-    //Wait 0.3 seconds for mouse to get there.
-    wait(300);
-    //Find BankBlue color
-    if color_BankBlue.findIn(AREA_MS, foundPnt) then
-    begin
-      //Write that BankBlue color was found and where it was found.
-      writeln('Found color BankBlue'+toStr(foundPnt));
-      //Click where BankBox was found.
-      FastClick(Mouse_left);
-      //Wait for 2 second for Bank to open and load.
-      wait(2000);
-        //Find ShopOrange color
-        if color_ShopOrange.findIn(AREA_MS, foundPnt) then
-        begin
-          //Write that ShopOrange color was found and where it was found.
-          writeln('Found color ShopOrange'+toStr(foundPnt));
-          //Wait 0.1 seconds and wait for next Procedure to start.
-          wait(100);
-        end else
-        begin
-          writeln('Didnt find color ShopOrange'+toStr(foundPnt));
-          MoveMouse(684, 119);
-          wait(300);
-          FastClick(Mouse_left);
-          wait(1500);
-          writeln('failCounter'+toStr(failCounter));
-          failCounter := (failCounter + 1);
-          if (failCounter = 10) then
-          begin
-            failCounter := 0;
-            writeln('failCounter'+toStr(failCounter));
-            TeleToBarbGoToBank;
-            DepositeThingsInBank;
-          end else
-          begin
-            DepositeThingsInBank;
-          end;
-        end;
-    end else
-    begin
-      writeln('Didnt find color BankBlue'+toStr(foundPnt));
-      MoveMouse(684, 119);
-      wait(300);
-      FastClick(Mouse_left);
-      wait(1500);
-      writeln('failCounter'+toStr(failCounter));
-      failCounter := (failCounter + 1);
-      if (failCounter = 10) then
-      begin
-        failCounter := 0;
-        writeln('failCounter'+toStr(failCounter));
-        TeleToBarbGoToBank;
-        DepositeThingsInBank;
-      end else
-      begin
-        DepositeThingsInBank;
-      end;
-    end;
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  if (failcounter <= 64) then
+  begin
+    writeln('Found color BanBox');
   end else
   begin
-    writeln('Didnt find color BankBox'+toStr(foundPnt));
-    MoveMouse(684, 119);
-    wait(300);
-    FastClick(Mouse_left);
-    wait(1500);
-    writeln('failCounter'+toStr(failCounter));
-    failCounter := (failCounter + 1);
-    if (failCounter = 10) then
-    begin
-      failCounter := 0;
-      writeln('failCounter'+toStr(failCounter));
-      TeleToBarbGoToBank;
-      DepositeThingsInBank;
-    end else
-    begin
-      DepositeThingsInBank;
-    end;
+    writeln('Didnt find color BanBox');
   end;
+  failCounter := 0;
+  MoveMouse(x + 15, y + 10);
+
+  //Wait for blue text.
+  while ((failCounter <= 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 16776960, 41, 32, 128, 47, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  if (failcounter <= 64) then
+  begin
+    writeln('Found color blue text');
+  end else
+  begin
+    writeln('Didnt find color blue text');
+  end;
+  failCounter := 0;
+  FastClick(Mouse_left);
+
+
+  //Wait for shoporange
+  while ((failCounter <= 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 2070783, 131, 51, 373, 69, 0))) do
+  begin
+  wait(100);
+  failCounter := failCounter + 1;
+  end;
+  if (failcounter <= 64) then
+  begin
+    writeln('Found color ShopOrange');
+  end else
+  begin
+    writeln('Didnt find color ShopOrange');
+  end;
+  failCounter := 0;
+
+  //Deposite coals.
+  MoveMouse(437, 338);
+  wait(200);
+  FastClick(Mouse_left);
+  wait(200);
+
+  PrecedureComplete := 1;
 end;
 
 Procedure DepositeCoals;
 var
   x, y: integer;
 begin
-  //Move mouse deposite all.
-  MoveMouse(437, 338);
-  //Wait 0.2 second for mouse to get there.
-  wait(200);
-  //Click left mouse button.
-  FastClick(Mouse_left);
-  //Wait for stuff to deposite into bank.
-  wait(200);
 end;
 
 begin
@@ -367,20 +305,49 @@ begin
   repeat
   GoToRock;
   ClickOnRocksFourTimes;    //8 rocks  8
-  GolemCheck;
+  foundGolem;
+  if (foundGolem = 1) then
+  begin
+    TeleToBarbGoToBank;
+  end;
+  foundGolem := 0;
   wait(150);
   ClickOnRocksFourTimes;    //8 rocks  16
-  GolemCheck;
+  foundGolem;
+  if (foundGolem = 1) then
+  begin
+    TeleToBarbGoToBank;
+  end;
+  foundGolem := 0;
   wait(150);
   ClickOnRocksFourTimes;    //8 rocks  24
-  GolemCheck;
+  foundGolem;
+  if (foundGolem = 1) then
+  begin
+    TeleToBarbGoToBank;
+  end;
+  foundGolem := 0;
   wait(150);
   ClickOnRocksTwice;        //4 rocks  28
-  GolemCheck;
+  foundGolem;
+  if (foundGolem = 1) then
+  begin
+    TeleToBarbGoToBank;
+  end;
+  foundGolem := 0;
   wait(150);
-  GolemCheck;
+  foundGolem;
+  if (foundGolem = 1) then
+  begin
+    TeleToBarbGoToBank;
+  end;
+  foundGolem := 0;
   GoToBank;
   DepositeThingsInBank;
-  DepositeCoals;
+  if (PrecedureComplete = 0) then
+  begin
+    DepositeThingsInBank;
+  end;
+  PrecedureComplete := 0;
   Until(False);
 end.
