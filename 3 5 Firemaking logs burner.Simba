@@ -1,7 +1,14 @@
-//Resizable-screen mode
-//have x as 14
-//Have VBO on
-//2340
+//SETUP
+//Be 1 square down from bank banker in Grand Exchange. Banker that is next to Fountain.
+//Set to Fixed-Screen size. Then Resizable screen size.
+//Zoom in as much as possible.
+//Set camera to top.
+//Set camera to north, by clicking on compass.
+
+//Have logs at first space of bank.
+//Have tinderbox at first space of inventory.
+
+//Adjust wait times if needed.
 program new;
 {$i AeroLib/AeroLib.Simba}
 
@@ -78,292 +85,97 @@ end;
 
 Procedure DoAll;
 var
-  x, y : integer;
+  x, y, i, topLeftX, topLeftY, bankX, bankY : integer;
 begin
+  bankX := 405;
+  bankY := 155;
+  topLeftX := 601;
+  topLeftY := 301;
 
 //right click on bank clerk
-  MoveMouse(393, 203);
-  wait(200);
+  MoveMouse(bankX, bankY);
+  wait(2000);
   FastClick(Mouse_right);
 
 //left click on bank clerk
-  MoveMouse(391, 241);
-  wait(200);
+  MoveMouse(bankX, bankY+40);
+  wait(2000);
   FastClick(Mouse_left);
 
 //wait for bank to load
-  wait(1100);
+  wait(2000);
 
-//rightclick on gem
+//rightclick on logs
   MoveMouse(56, 135);
-  wait(200);
+  wait(2000);
   FastClick(Mouse_right);
 
 //leftclick on withdraw all
   GetMousePos(x, y);
   MoveMouse(x, y + 80);
-  wait(200);
+  wait(2000);
   FastClick(Mouse_left);
 
-//exit bank
+//leftclick exit bank
   MoveMouse(490, 64);
-  wait(200);
+  wait(2000);
   FastClick(Mouse_left);
 
 //click to go up and right one square
-  MoveMouse(433, 269);
-  wait(200);
+  MoveMouse(525, 165);
+  wait(2000);
   FastClick(Mouse_left);
   wait(3000);
 
-//click to go one square down
-  MoveMouse(401, 343);
-  wait(200);
+//click to go down one square
+  MoveMouse(405, 405);
+  wait(2000);
   FastClick(Mouse_left);
   wait(3000);
 
-//use Tinderbox on Log 2
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(657, 257);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
+  for i := 2 to 28 do
+  begin
+    //Click on tinderbox in 1-st inv slot.
+    MoveMouse(topLeftX, topLeftY);
+    wait(300);
+    FastClick(Mouse_left);
 
-//use Tinderbox on Log 3
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(701, 257);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
+    //Click on log inv slot.
+    if(i <= 4) then
+    begin
+      MoveMouse((topLeftX + ((i-1)*45)), topLeftY);
+    end;
+    if((i >= 5) AND (i <= 8)) then
+    begin
+      MoveMouse((topLeftX + ((i-5)* 45)), topLeftY+35);
+    end;
+    if((i >= 9) AND (i <= 12)) then
+    begin
+      MoveMouse((topLeftX + ((i-9)* 45)), topLeftY+2*35);
+    end;
+    if((i >= 13) AND (i <= 16)) then
+    begin
+      MoveMouse((topLeftX + ((i-13)* 45)), topLeftY+3*35);
+    end;
+    if((i >= 17) AND (i <= 20)) then
+    begin
+      MoveMouse((topLeftX + ((i-17)* 45)), topLeftY+4*35);
+    end;
+    if((i >= 21) AND (i <= 24)) then
+    begin
+      MoveMouse((topLeftX + ((i-21)* 45)), topLeftY+5*35);
+    end;
+    if((i >= 25) AND (i <= 28)) then
+    begin
+      MoveMouse((topLeftX + ((i-25)* 45)), topLeftY+6*35);
+    end;
 
-//use Tinderbox on Log 4
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(745, 258);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
+    wait(300);
+    FastClick(Mouse_left);
 
-//use Tinderbox on Log 5
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(613, 291);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 6
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(657, 291);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 7
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(701, 291);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 8
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(745, 291);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 9
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(613, 325);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 10
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(657, 325);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 11
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(701, 325);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 12
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(745, 325);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 13
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(613, 359);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 14
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(657, 359);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 15
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(701, 359);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 16
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(745, 359);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 17
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(613, 393);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 18
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(657, 393);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 19
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(701, 393);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 20
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(745, 393);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 21
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(613, 427);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 22
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(657, 427);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 23
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(701, 427);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 24
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(745, 427);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 25
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(613, 461);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 26
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(657, 461);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 27
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(701, 461);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
-
-//use Tinderbox on Log 28
-  MoveMouse(611, 252);
-  wait(200);
-  FastClick(Mouse_left);
-  MoveMouse(745, 461);
-  wait(200);
-  FastClick(Mouse_left);
-  wait(random(10000,11000));
+    //Wait random for log to burn.
+    wait(random(10000,11000));
+  end;
 
 //click to go near bank 1
   MoveMouse(683, 41);
@@ -372,7 +184,7 @@ begin
   wait(15000);
 
 //click to go near bank 2
-  MoveMouse(365, 43);
+  MoveMouse(678, 93);
   wait(200);
   FastClick(Mouse_left);
   wait(15000);
@@ -387,8 +199,6 @@ begin
   initAL;
   repeat
     DoAll;
-    ChickenCheck;
-    wait(100);
     ChickenCheck;
     MimeCheck;
   Until(False);
