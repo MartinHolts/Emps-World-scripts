@@ -1,10 +1,9 @@
 //SCREEN SIZE
+//Set to Fixed-Screen size. Then Resizable screen size.
 //Screen size should be (790 570).
 //Can check this by selecting Emps screen.
 //Moving mouse to most bottom right of screen of Emps.
 //Coordinates should be 790,570 bottom left of Simba.
-//Be 1 square down from bank banker in Grand Exchange. Banker that is next to Fountain.
-//Set to Fixed-Screen size. Then Resizable screen size.
 
 //CAMERA ANGEL AND ZOOM.
 //Zoom out as much as possible.
@@ -14,8 +13,12 @@
 //BANK AND INV
 //Have logs at first space of bank.
 //Have tinderbox at first space of inventory.
+//Make sure you are not sitting.
+//Set run on.
 
-//Adjust wait times if needed.
+//STARTING POSITION
+//Be 1 square down from bank banker in Grand Exchange. Banker that is next to Fountain.
+
 program new;
 {$i AeroLib/AeroLib.Simba}
 
