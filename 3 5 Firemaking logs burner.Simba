@@ -1,10 +1,17 @@
-//SETUP
+//SCREEN SIZE
+//Screen size should be (790 570).
+//Can check this by selecting Emps screen.
+//Moving mouse to most bottom right of screen of Emps.
+//Coordinates should be 790,570 bottom left of Simba.
 //Be 1 square down from bank banker in Grand Exchange. Banker that is next to Fountain.
 //Set to Fixed-Screen size. Then Resizable screen size.
-//Zoom in as much as possible.
+
+//CAMERA ANGEL AND ZOOM.
+//Zoom out as much as possible.
 //Set camera to top.
 //Set camera to north, by clicking on compass.
 
+//BANK AND INV
 //Have logs at first space of bank.
 //Have tinderbox at first space of inventory.
 
@@ -87,8 +94,8 @@ Procedure DoAll;
 var
   x, y, i, topLeftX, topLeftY, bankX, bankY : integer;
 begin
-  bankX := 405;
-  bankY := 155;
+  bankX := 392;
+  bankY := 258;
   topLeftX := 601;
   topLeftY := 301;
 
@@ -122,13 +129,13 @@ begin
   FastClick(Mouse_left);
 
 //click to go up and right one square
-  MoveMouse(525, 165);
+  MoveMouse(427, 261);
   wait(2000);
   FastClick(Mouse_left);
   wait(3000);
 
 //click to go down one square
-  MoveMouse(405, 405);
+  MoveMouse(392, 338);
   wait(2000);
   FastClick(Mouse_left);
   wait(3000);
