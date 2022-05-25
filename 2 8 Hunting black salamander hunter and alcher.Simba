@@ -1,10 +1,22 @@
-//set screen size to fixed screen size
-//zoom in camera 100%
-//turn only VBO MMB CDL Ani on.
-//set traps north of torch.
-//set angle to top
-//set compass to north.
-//step once up then bottom before starting script.
+//RESOLUTION AND ZOOM
+//Set screen size to Rezisable-screen then to Fixed-screen size
+//Resolution should be 770x530
+//Zoom in camera 100%
+//Set angle to top.
+//Set compass to north.
+
+//LOCATION
+//Set traps north of torch.
+//Step once up then bottom before starting script.
+//When going down the rope to karamja volcano cave.
+//You can put 4 traps around you when being 2 tiles from the torch.
+//You can choose other location as long as character
+//clicks on traps to pick them up or change the coordinates for picking up.
+
+//ITEMS
+//Have 4 placed around you.
+//Have runes for high alch.
+
 program new;
 //{$DEFINE SMART}
 {$i AeroLib/AeroLib.Simba}
@@ -32,7 +44,7 @@ begin
   if color_PlayerTalkYellow.findIn(AREA_MS, foundPnt) then
   begin
     writeln('Found color color_PlayerTalkYellow'+toStr(foundPnt));
-    terminatescript;
+//    terminatescript;
   end;
 // 3
 //  if color_PlayerMapPointWhite.findIn(AREA_MM, foundPnt) then
@@ -50,7 +62,7 @@ begin
   if color_PlayerMapPointGreen.findIn(AREA_MM, foundPnt) then
   begin
     writeln('Found color color_PlayerMapPointGreen'+toStr(foundPnt));
-    terminatescript;
+//    terminatescript;
   end;
 end;
 
@@ -111,11 +123,11 @@ var
   color_TopLeftBlue : TColEx;
   foundPntOne    : TPoint;
 begin
-  color_BoxTrapBrownInInv.create(7048093, 1, 1.26, 0.03);
+  color_BoxTrapBrownInInv.create(7178649, 1, 1.26, 0.03);
   color_TopLeftBlue.create(16711168, 1, 1.26, 0.03);
 
   //pick up box 1
-  MoveMouse(147, 214);
+  MoveMouse(144, 202);
   wait(100);
   while (not color_TopLeftBlue.findIn(AREA_MS, foundPntOne)) do
   begin
@@ -141,7 +153,7 @@ begin
         FastClick(Mouse_left);
         wait(600);
       end;
-      MoveMouse(147, 214);
+      MoveMouse(144, 202);
       while (not color_TopLeftBlue.findIn(AREA_MS, foundPntOne)) do
       begin
         wait(100);
@@ -165,11 +177,11 @@ var
   color_TopLeftBlue : TColEx;
   foundPntTwo    : TPoint;
 begin
-  color_BoxTrapBrownInInv.create(7048093, 1, 1.26, 0.03);
+  color_BoxTrapBrownInInv.create(7178649, 1, 1.26, 0.03);
   color_TopLeftBlue.create(16711168, 1, 1.26, 0.03);
 
   //pick up box 2
-  MoveMouse(284, 80);
+  MoveMouse(264, 82);
   wait(100);
   while (not color_TopLeftBlue.findIn(AREA_MS, foundPntTwo)) do
   begin
@@ -195,7 +207,7 @@ begin
         FastClick(Mouse_left);
         wait(600);
       end;
-      MoveMouse(284, 80);
+      MoveMouse(264, 82);
       while (not color_TopLeftBlue.findIn(AREA_MS, foundPntTwo)) do
       begin
         wait(100);
@@ -219,11 +231,11 @@ var
   color_TopLeftBlue : TColEx;
   foundPntThree    : TPoint;
 begin
-  color_BoxTrapBrownInInv.create(7048093, 1, 1.26, 0.03);
+  color_BoxTrapBrownInInv.create(7178649, 1, 1.26, 0.03);
   color_TopLeftBlue.create(16711168, 1, 1.26, 0.03);
 
   //pick up box 3
-  MoveMouse(422, 207);
+  MoveMouse(385, 202);
   wait(100);
   while (not color_TopLeftBlue.findIn(AREA_MS, foundPntThree)) do
   begin
@@ -249,7 +261,7 @@ begin
         FastClick(Mouse_left);
         wait(600);
       end;
-      MoveMouse(422, 207);
+      MoveMouse(385, 202);
       while (not color_TopLeftBlue.findIn(AREA_MS, foundPntThree)) do
       begin
         wait(100);
@@ -273,11 +285,11 @@ var
   color_TopLeftBlue : TColEx;
   foundPntFour    : TPoint;
 begin
-  color_BoxTrapBrownInInv.create(7048093, 1, 1.26, 0.03);
+  color_BoxTrapBrownInInv.create(7178649, 1, 1.26, 0.03);
   color_TopLeftBlue.create(16711168, 1, 1.26, 0.03);
 
   //pick up box 4
-  MoveMouse(287, 347);
+  MoveMouse(265, 321);
   wait(100);
   while (not color_TopLeftBlue.findIn(AREA_MS, foundPntFour)) do
   begin
@@ -303,7 +315,7 @@ begin
         FastClick(Mouse_left);
         wait(600);
       end;
-      MoveMouse(287, 347);
+      MoveMouse(265, 321);
       while (not color_TopLeftBlue.findIn(AREA_MS, foundPntFour)) do
       begin
         wait(100);
