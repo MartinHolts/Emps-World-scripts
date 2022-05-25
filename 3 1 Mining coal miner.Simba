@@ -1,40 +1,25 @@
-//SCRIPT OUTPUTS
-// Time to complete one script loop. 1:35
-// XP
-// Gives     7 852 xp    in one script loop.
-// Gives   297 549 xp    in one hour.
-// ITEMS
-// Gives        26 coals in one script loop.
-// Gives       985 coals in one hour.
-// Money
-// Gives    75 400 coins in one script loop.
-// Gives 2 857 263 coins in one hour.
-// In case coal price is 2900 coins.
+//SCREEN SIZE
+//Set to Fixed-Screen size. Then Resizable screen size.
+//Screen size should be (790 570).
+//Can check this by selecting Emps screen.
+//Moving mouse to most bottom right of screen of Emps.
+//Coordinates should be 790,570 bottom left of Simba.
 
-//CHANGE SETTINGS IN SETTINGS
-//Set screen mode to Fixed-screen mode and then to Resizable-screen mode.
-//Only enable VBO mode. CDL.
-//Leave brigthness as is.        790 570 size of screen
-//Set private to Off.
-
-//MOVE CAMERA
-//Set camera to north.
-//Set camera to most high with w.
+//CAMERA ANGEL AND ZOOM.
 //Zoom out as much as possible.
+//Set camera to most top.
+//Set camera to north, by clicking on compass.
 
-//SET RUN AND HAVE PICK
+//BANK AND INV
+//Have 1st and last space on infentory free.
+//1st space is used to put essence into bank.
+//Last space is used to check when inventory is full with essence.
+//Set retaliate to off. So that you can run from Golem.
 //Make sure you are not sitting.
 //Set run on.
-//Have pick equipped or in inventory. If in inventory don't put it in first place.
-//Have free space in bank for rune ess.
-//Don't wear grey colored stuff that would match with BankBox color.
 
-//BUGS
-//Doesn't find golem yellow on main screen.
-//Clicks on wisard sometimes that is on Entrance to rune essence mine.
-//Gets stuck on shopkeeper if it is one square south of me and he is next to bank box.
-//Keeps clicking on shopkeeper and if hovers over bankbox shopkeeper is in way and shows yellow top left.
-//Doesn't click on barb tele correctly if failcounter reachers 10.
+//STARTING POSITION
+//Be left of barbarian bank chest before starting script.
 
 program new;
 {$i AeroLib/AeroLib.Simba}
@@ -48,7 +33,7 @@ var
   x, y, counter: integer;
 begin                           //For Main PC 11009278  Works
   //Wait for YellowArrowOnMap
-  while ((failCounter <= 5) AND not (findColorTolerance(x, y, 11009278, 606, 38, 775, 198, 1))) do
+  while ((failCounter <= 5) AND not (findColorTolerance(x, y, 2881787, 606, 38, 775, 198, 1))) do
   begin
     wait(100);
     failCounter := failCounter + 1;
@@ -76,12 +61,12 @@ var
   x, y, counter: integer;
 begin
   //Open quest tab
-  MoveMouse(633, 516);
+  MoveMouse(626,255);
   wait(100);
   FastClick(Mouse_left);
 
   //Click on barbarian teleport
-  MoveMouse(609, 306);
+  MoveMouse(597,345);
   wait(100);
   FastClick(Mouse_left);
 
@@ -144,7 +129,7 @@ end;
 Procedure GoToRock;
 begin
   //Move to first map square.
-  MoveMouse(676, 147);
+  MoveMouse(675, 148);
   wait(500);
   FastClick(Mouse_left);
   //Wait for 4 seconds to get there.
@@ -153,66 +138,67 @@ end;
 
 Procedure ClickOnRocksFourTimes;
 var
-  color_MineEntranceBlueText : TColEx;
+  color_CoalBlueText : TColEx;
   foundPnt    : TPoint;
 begin
-  color_MineEntranceBlueText.create(16711168, 1, 1.26, 0.03);
+  color_CoalBlueText.create(16711168, 1, 1.26, 0.03);
+
   //Click on Rock 2
   MoveMouse(395, 337);
   wait(500);
-  if color_MineEntranceBlueText.findIn(AREA_MS, foundPnt) then
+  if color_CoalBlueText.findIn(AREA_MS, foundPnt) then
   begin
-    writeln('Found color MineEntranceBlueText for Rock 2'+toStr(foundPnt));
+    writeln('Found color CoalBlueText for Rock 2'+toStr(foundPnt));
     FastClick(Mouse_left);
-    //Wait for 3 seconds to mine rock.
     wait(5500);
   end;
+
   //Click on Rock 3
   MoveMouse(444, 344);
   wait(500);
-  if color_MineEntranceBlueText.findIn(AREA_MS, foundPnt) then
+  if color_CoalBlueText.findIn(AREA_MS, foundPnt) then
   begin
-    writeln('Found color MineEntranceBlueText for Rock 3'+toStr(foundPnt));
+    writeln('Found color CoalBlueText for Rock 3'+toStr(foundPnt));
     FastClick(Mouse_left);
-    //Wait for 3 seconds to mine rock.
     wait(5500);
   end;
+
   //Click on Rock 4
   MoveMouse(437, 302);
   wait(500);
-  if color_MineEntranceBlueText.findIn(AREA_MS, foundPnt) then
+  if color_CoalBlueText.findIn(AREA_MS, foundPnt) then
   begin
-    writeln('Found color MineEntranceBlueText for Rock 4'+toStr(foundPnt));
+    writeln('Found color CoalBlueText for Rock 4'+toStr(foundPnt));
     FastClick(Mouse_left);
-    //Wait for 3 seconds to mine rock.
     wait(5500);
   end;
-  //Click on Rock 1 again
+
+  //Click on Rock 1
   MoveMouse(320, 302);
   wait(500);
-  if color_MineEntranceBlueText.findIn(AREA_MS, foundPnt) then
+  if color_CoalBlueText.findIn(AREA_MS, foundPnt) then
   begin
-    writeln('Found color MineEntranceBlueText for Rock 1'+toStr(foundPnt));
+    writeln('Found color CoalBlueText for Rock 1'+toStr(foundPnt));
     FastClick(Mouse_left);
-    //Wait for 3 seconds to mine rock.
     wait(5500);
   end;
+
 end;
 
-Procedure ClickOnRocksTwice;
+Procedure ClickOnRocksOnce;
 var
-  color_MineEntranceBlueText : TColEx;
+  color_CoalBlueText : TColEx;
   foundPnt    : TPoint;
 begin
-  color_MineEntranceBlueText.create(16711168, 1, 1.26, 0.03);
+  color_CoalBlueText.create(16711168, 1, 1.26, 0.03);
+
   //Click on Rock 2
   MoveMouse(395, 337);
   wait(500);
-  if color_MineEntranceBlueText.findIn(AREA_MS, foundPnt) then
+  if color_CoalBlueText.findIn(AREA_MS, foundPnt) then
   begin
-    writeln('Found color MineEntranceBlueText for Rock 2'+toStr(foundPnt));
+    writeln('Found color CoalBlueText for Rock 2'+toStr(foundPnt));
     FastClick(Mouse_left);
-    //Wait for 3 seconds to mine rock.
     wait(5500);
   end;
 end;
@@ -220,7 +206,7 @@ end;
 Procedure GoToBank;
 begin
     //Open quest tab
-    MoveMouse(691, 91);
+    MoveMouse(691, 92);
     wait(100);
     FastClick(Mouse_left);
     //Wait for 6-7 seconds to get to bank.
@@ -237,11 +223,11 @@ var
   x, y, counter: integer;
 
 begin
-  //Wait for BankBox
-  while ((failCounter <= 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 9474460, 420, 270, 467, 324, 0))) do
+  //Wait 6.5 seconds or until find bankbox.
+  while ((failCounter <= 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 5395031, 423, 283, 451, 319, 0))) do
   begin
-  wait(100);
-  failCounter := failCounter + 1;
+    wait(100);
+    failCounter := failCounter + 1;
   end;
   if (failcounter <= 64) then
   begin
@@ -261,10 +247,10 @@ begin
   end;
   if (failcounter <= 64) then
   begin
-    writeln('Found color blue text');
+    writeln('Found bankbox blue text');
   end else
   begin
-    writeln('Didnt find color blue text');
+    writeln('Didnt find bankbox blue text');
   end;
   failCounter := 0;
   FastClick(Mouse_left);
@@ -278,10 +264,10 @@ begin
   end;
   if (failcounter <= 64) then
   begin
-    writeln('Found color ShopOrange');
+    writeln('Found color bankOrange');
   end else
   begin
-    writeln('Didnt find color ShopOrange');
+    writeln('Didnt find color bankOrange');
   end;
   failCounter := 0;
 
@@ -294,60 +280,54 @@ begin
   PrecedureComplete := 1;
 end;
 
-Procedure DepositeCoals;
-var
-  x, y: integer;
-begin
-end;
-
 begin
   initAL;
   repeat
-  GoToRock;
-  ClickOnRocksFourTimes;    //8 rocks  8
-  foundGolem;
-  if (foundGolem = 1) then
-  begin
-    TeleToBarbGoToBank;
-  end;
-  foundGolem := 0;
-  wait(150);
-  ClickOnRocksFourTimes;    //8 rocks  16
-  foundGolem;
-  if (foundGolem = 1) then
-  begin
-    TeleToBarbGoToBank;
-  end;
-  foundGolem := 0;
-  wait(150);
-  ClickOnRocksFourTimes;    //8 rocks  24
-  foundGolem;
-  if (foundGolem = 1) then
-  begin
-    TeleToBarbGoToBank;
-  end;
-  foundGolem := 0;
-  wait(150);
-  ClickOnRocksTwice;        //4 rocks  28
-  foundGolem;
-  if (foundGolem = 1) then
-  begin
-    TeleToBarbGoToBank;
-  end;
-  foundGolem := 0;
-  wait(150);
-  foundGolem;
-  if (foundGolem = 1) then
-  begin
-    TeleToBarbGoToBank;
-  end;
-  foundGolem := 0;
-  GoToBank;
-  DepositeThingsInBank;
-  if (PrecedureComplete = 0) then
-  begin
+    GoToRock;
+    ClickOnRocksFourTimes;    //8 rocks  8
+    GolemCheck;
+    if (foundGolem = 1) then
+    begin
+      TeleToBarbGoToBank;
+    end;
+    foundGolem := 0;
+    wait(150);
+    ClickOnRocksFourTimes;    //8 rocks  16
+    GolemCheck;
+    if (foundGolem = 1) then
+    begin
+      TeleToBarbGoToBank;
+    end;
+    foundGolem := 0;
+    wait(150);
+    ClickOnRocksFourTimes;    //8 rocks  24
+    GolemCheck;
+    if (foundGolem = 1) then
+    begin
+      TeleToBarbGoToBank;
+    end;
+    foundGolem := 0;
+    wait(150);
+    ClickOnRocksOnce;        //2 rocks  26
+    GolemCheck;
+    if (foundGolem = 1) then
+    begin
+      TeleToBarbGoToBank;
+    end;
+    foundGolem := 0;
+    wait(150);
+    GolemCheck;
+    if (foundGolem = 1) then
+    begin
+      TeleToBarbGoToBank;
+    end;
+    foundGolem := 0;
+    GoToBank;
     DepositeThingsInBank;
-  end;
-  PrecedureComplete := 0;
+    if (PrecedureComplete = 0) then
+    begin
+      DepositeThingsInBank;
+    end;
+    PrecedureComplete := 0;
   Until(False);
 end.
