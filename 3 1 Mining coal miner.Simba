@@ -11,9 +11,7 @@
 //Set camera to north, by clicking on compass.
 
 //BANK AND INV
-//Have 1st and last space on infentory free.
-//1st space is used to put essence into bank.
-//Last space is used to check when inventory is full with essence.
+//Don't have anything else in inventory, because whole inventory gets deposited into bank. Wear pickaxe.
 //Set retaliate to off. So that you can run from Golem.
 //Make sure you are not sitting.
 //Set run on.
