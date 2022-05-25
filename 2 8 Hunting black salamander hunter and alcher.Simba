@@ -1,9 +1,14 @@
-//RESOLUTION AND ZOOM
-//Set screen size to Rezisable-screen then to Fixed-screen size
-//Resolution should be 770x530
-//Zoom in camera 100%
-//Set angle to top.
-//Set compass to north.
+//SCREEN SIZE
+//Set to Resizable-screen size. Then Fixed-Screen size.
+//Screen size should be (770 530).
+//Can check this by selecting Emps screen.
+//Moving mouse to most bottom right of screen of Emps.
+//Coordinates should be 770,530 bottom left of Simba.
+
+//CAMERA ANGEL AND ZOOM.
+//Zoom out as much as possible.
+//Set camera to most top.
+//Set camera to north, by clicking on compass.
 
 //LOCATION
 //Set traps north of torch.
