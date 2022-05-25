@@ -1,6 +1,25 @@
-//Resizable-screen mode
-//have x as 14
-//Have VBO on
+//SCREEN SIZE
+//Set to Fixed-Screen size. Then Resizable screen size.
+//Screen size should be (790 570).
+//Can check this by selecting Emps screen.
+//Moving mouse to most bottom right of screen of Emps.
+//Coordinates should be 790,570 bottom left of Simba.
+
+//CAMERA ANGEL AND ZOOM.
+//Zoom out as much as possible.
+//Set camera to most top.
+//Set camera to north, by clicking on compass.
+
+//BANK AND INV
+//Set retaliate to off. So that you can run from Chicken.
+//Have gems at first bank slot.
+//Have chisel in first inventory slot.
+
+//LOCATION
+//Stand left of Clan Wars bank chest.
+
+//MODIFICATIONS
+//You can comment out second gem cutting if you want to only cut once.
 program new;
 {$i AeroLib/AeroLib.Simba}
 
@@ -103,22 +122,22 @@ begin
   wait(200);
   FastClick(Mouse_left);
 
-//use knife on uncut gem
-  MoveMouse(611, 252);
+//use chisel on uncut gem
+  MoveMouse(604, 296);
   wait(200);
   FastClick(Mouse_left);
-  MoveMouse(657, 258);
+  MoveMouse(646, 301);
   wait(200);
   FastClick(Mouse_left);
 
 //Wait 13-14 sec
   wait(random(13000,14000));
 
-//use knife on cut gem
-  MoveMouse(611, 252);
+//use chisel on cut gem
+  MoveMouse(604, 296);
   wait(200);
   FastClick(Mouse_left);
-  MoveMouse(657, 258);
+  MoveMouse(646, 301);
   wait(200);
   FastClick(Mouse_left);
 
