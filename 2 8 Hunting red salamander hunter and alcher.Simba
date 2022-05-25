@@ -1,9 +1,21 @@
+//RESOLUTION AND ZOOM
 //set screen size to fixed screen size
+//Resolution should be 770x530
 //zoom in camera 100%
-//turn only VBO MMB CDL Ani on.
-//set traps south of tree.
-//set angle to top
+//set angle to top.
 //set compass to north.
+
+//LOCATION
+//set traps south of tree.
+//When coming out of karamja volcano cave.
+//There is tree to the north of the entrance across the lava.
+//You can put 4 traps around you when being 2 tiles from the tree.
+//You can choose other location as long as character
+//Click on traps to pick them up or change the coordinates for picking up.
+
+//ITEMS
+//Have 4 placed around you.
+//Have runes for high alch.
 program new;
 //{$DEFINE SMART}
 {$i AeroLib/AeroLib.Simba}
@@ -91,7 +103,7 @@ var
   color_CoinsWhite : TColEx;
   foundPnt    : TPoint;
 begin
-  color_RedSalamanderRed.create(596561, 1, 1.26, 0.03);
+  color_RedSalamanderRed.create(1190766, 1, 1.26, 0.03);
   color_CoinsWhite.create(65278, 1, 1.26, 0.03);
   if color_RedSalamanderRed.findIn(AREA_INV, foundPnt) then
   begin
@@ -140,7 +152,7 @@ var
   color_RedSalamanderRed : TColEx;
   foundPnt    : TPoint;
 begin
-  color_BoxTrapBrownInInv.create(6455183, 1, 1.26, 0.03);
+  color_BoxTrapBrownInInv.create(7178649, 1, 1.26, 0.03);
   //pick up box 1
   MoveMouse(117, 217);
   wait(100);
