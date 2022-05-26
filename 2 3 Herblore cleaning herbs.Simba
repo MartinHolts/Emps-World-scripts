@@ -1,5 +1,22 @@
-//Resizable-screen mode
-//Have VBO on
+//SCREEN SIZE
+//Set to Fixed-Screen size. Then Resizable screen size.
+//Screen size should be (790 570).
+//Can check this by selecting Emps screen.
+//Moving mouse to most bottom right of screen of Emps.
+//Coordinates should be 790,570 bottom left of Simba.
+
+//CAMERA ANGEL AND ZOOM.
+//Zoom out as much as possible.
+//Set camera to most top.
+//Set camera to north, by clicking on compass.
+
+//BANK AND INV
+//Set retaliate to off. So that you can run from Chicken.
+//Have grimy herbs at first bank slot.
+
+//LOCATION
+//Stand left of Clan Wars bank chest.
+
 program new;
 //{$DEFINE SMART}
 {$i AeroLib/AeroLib.Simba}
@@ -106,7 +123,7 @@ begin
   FastClick(Mouse_left);
 
 //clean herbs
-  MoveMouse(740, 474);
+  MoveMouse(732,513);
   wait(400);
   FastClick(Mouse_left);
   wait(random(15000,16000));
