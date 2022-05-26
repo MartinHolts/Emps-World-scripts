@@ -1,30 +1,27 @@
-//Production
-//Teeb umbes 5000 Vial of Waters tunnis.
-//Have screen size fixed
-//VBO mode on
-//Graphics Minimum
-//Leave brightness as is
-//Compass centered to north
-//Screen angle top
+//SCREEN SIZE
+//Set to Resizable-screen size. Then Fixed-Screen size.
+//Screen size should be (770 530).
+//Can check this by selecting Emps screen.
+//Moving mouse to most bottom right of screen of Emps.
+//Coordinates should be 770,530 bottom left of Simba.
 
-//CHANGE SETTINGS IN SETTINGS
-//Set screen mode to Fixed-screen mode and then to Resizable-screen mode.
-//Only enable VBO mode. CDL.
-//Leave brigthness as is.
-//Set private to Off.
-
-//MOVE CAMERA
-//Set camera to north.
-//Set camera to most high with w.
+//CAMERA ANGEL AND ZOOM.
 //Zoom out as much as possible.
+//Set camera to most top.
+//Set camera to north, by clicking on compass.
+//Leave brightness as is at 62%.
 
-//Bugs
-//Clicks outside of bank.
-//When person talks on window thinks it found yellow.
-//Hakkas barb inimest ründama. Panna attack option teiseks äkki.
-//Et teine option oleks attack ja esimene talk.
-//Monster tuli liiga hilja ja kasutaja ei näinud teda. Tahtis banka ainult korduvalt minna.
-//Panna retaliate off äkki.
+//LOCATION
+//Be in Barbarian bank.
+
+//BANK AND INV
+//Have first inventry spot empty.
+//Have runes for humidify spell.
+//Have coins to buy empty vials
+
+//POSSIBLE CHANGES.
+//Can comment out spell part if only wish to buy empty vials.
+
 program new;
 {$i AeroLib/AeroLib.Simba}
 
@@ -110,19 +107,25 @@ var
   foundPnt    : TPoint;
   var x, y: integer;
 begin
-  color_ShopKeeperHeadOrange.create(10661544, 3, 1.26, 0.03);
+  color_ShopKeeperHeadOrange.create(1528204, 0, 0, 0);
   color_ShopkeeperYellowText.create(65278, 1, 1.26, 0.03);
-  color_ShopOrange.create(2070526, 1, 1.26, 0.03);
+  color_ShopOrange.create(2070783, 1, 1.26, 0.03);
+
+  //If find shopkeeper head then move mouse to it.
   if color_ShopKeeperHeadOrange.findIn(AREA_MS, foundPnt) then
   begin
     writeln('Found color color_ShopKeeperHeadOrange'+toStr(foundPnt));
     HumanMMouse(foundPnt, 0, 0);
     wait(100);
+
+    //If find yellow text then right click.
     if color_ShopkeeperYellowText.findIn(AREA_MS, foundPnt) then
     begin
       writeln('Found color shopkeeperYelllowText 1st time'+toStr(foundPnt));
       FastClick(Mouse_right);
       wait(100);
+
+      //If find yellow text then click on trade.
       if color_ShopkeeperYellowText.findIn(AREA_MS, foundPnt) then
       begin
         writeln('Found color shopkeeperYelllowText 2nd time'+toStr(foundPnt));
@@ -133,11 +136,15 @@ begin
         wait(100);
         FastClick(Mouse_left);
         wait(1500);
+
+        //If find orange text in shop then end function.
         if color_ShopOrange.findIn(AREA_MS, foundPnt) then
         begin
           writeln('Found color ShopOrange'+toStr(foundPnt));
           wait(100);
         end else
+
+        //Didn't find orange text so clicking under character.
         begin
           writeln('Didnt find color ShopOrange'+toStr(foundPnt));
           MoveMouse(637, 115);
@@ -146,6 +153,8 @@ begin
           wait(1500);
           writeln('failCounter'+toStr(failCounter));
           failCounter := (failCounter + 1);
+
+          //If failed to open shop 10 times then run TeleToBarbGoToBank and OpenShop functions.
           if (failCounter = 10) then
           begin
             failCounter := 0;
@@ -153,11 +162,15 @@ begin
             TeleToBarbGoToBank;
             OpenShop;
           end else
+
+          //Didn't fail 10 times to open shop yet. Trying to open shop again.
           begin
             OpenShop;
           end;
         end;
       end else
+
+      //Didn't find blue text so clicking under character.
       begin
         writeln('Didnt find color BankBlue'+toStr(foundPnt));
         MoveMouse(637, 115);
@@ -166,6 +179,8 @@ begin
         wait(1500);
         writeln('failCounter'+toStr(failCounter));
         failCounter := (failCounter + 1);
+
+        //If failed to open shop 10 times then run TeleToBarbGoToBank and OpenShop functions.
         if (failCounter = 10) then
         begin
           failCounter := 0;
@@ -173,15 +188,21 @@ begin
           TeleToBarbGoToBank;
           OpenShop;
         end else
+
+        //Didn't fail 10 times to open shop yet. Trying to open shop again.
         begin
           OpenShop;
         end;
       end;
     end else
+
+    //Didn't find yellow text so clicking under character.
     begin
       writeln('Didnt find color color_ShopkeeperYellowText'+toStr(foundPnt));
       writeln('failCounter'+toStr(failCounter));
       failCounter := (failCounter + 1);
+
+      //If failed to open shop 10 times then run TeleToBarbGoToBank and OpenShop functions.
       if (failCounter = 10) then
       begin
         failCounter := 0;
@@ -189,11 +210,15 @@ begin
         TeleToBarbGoToBank;
         OpenShop;
       end else
+
+      //Didn't fail 10 times to open shop yet. Trying to open shop again.
       begin
         OpenShop;
       end;
     end;
   end else
+
+  //Didn't find shopkeeper head so clicking under character.
   begin
     writeln('Didnt find color color_ShopKeeperHeadOrange'+toStr(foundPnt));
     MoveMouse(637, 115);
@@ -202,6 +227,8 @@ begin
     wait(1500);
     writeln('failCounter'+toStr(failCounter));
     failCounter := (failCounter + 1);
+
+    //If failed to open shop 10 times then run TeleToBarbGoToBank and OpenShop functions.
     if (failCounter = 10) then
     begin
       failCounter := 0;
@@ -209,6 +236,8 @@ begin
       TeleToBarbGoToBank;
       OpenShop;
     end else
+
+    //Didn't fail 10 times to open shop yet. Trying to open shop again.
     begin
       OpenShop;
     end;
@@ -217,11 +246,14 @@ end;
 
 Procedure DepositeVialsOfWater;
 begin
-  //deposite vials of water
-  MoveMouse(585, 297);
+
+  //Right click on first inventory spot.
+  MoveMouse(585, 260);
   wait(200);
   FastClick(Mouse_right);
-  MoveMouse(585, 369);
+
+  //Left click on deposite all.
+  MoveMouse(585, 330);
   wait(200);
   FastClick(Mouse_left);
 
@@ -247,9 +279,10 @@ var
   color_BankBlue : TColEx;
   color_ShopOrange : TColEx;
 begin
-  color_BankBox.create(11382199, 1, 1.26, 0.03);
-  color_BankBlue.create(16382208, 1, 1.26, 0.03);
-  color_ShopOrange.create(2070526, 1, 1.26, 0.03);
+  color_BankBox.create(5460825, 1, 1.26, 0.03);
+  color_BankBlue.create(16776960, 1, 1.26, 0.03);
+  color_ShopOrange.create(2070783, 1, 1.26, 0.03);
+  //Move mouse to bankbox if find bankbox color.
   if color_BankBox.findIn(AREA_MS, foundPnt) then
   begin
     HumanMMouse(foundPnt, 0, 0);
@@ -257,26 +290,30 @@ begin
     MoveMouse(x + 5, y + 10);
     writeln('Found color BankBox'+toStr(foundPnt));
     wait(300);
+    //Left click to open bank if found blue text.
     if color_BankBlue.findIn(AREA_MS, foundPnt) then
     begin
       writeln('Found color BankBlue'+toStr(foundPnt));
       wait(300);
       FastClick(Mouse_left);
       wait(1500);
+      //Run DepositeVialsOfWater function if find orange text.
       if color_ShopOrange.findIn(AREA_MS, foundPnt) then
       begin
         writeln('Found color ShopOrange'+toStr(foundPnt));
         wait(200);
         DepositeVialsOfWater;
       end else
+      //If don't find orange text click map where you are standing.
       begin
         writeln('Didnt find color ShopOrange'+toStr(foundPnt));
-        MoveMouse(637, 115);
+        MoveMouse(639, 115);
         wait(500);
         FastClick(Mouse_left);
         wait(1500);
         writeln('failCounter'+toStr(failCounter));
         failCounter := (failCounter + 1);
+        //If didn't find bank 10 times. Run TeleToBarbGoToBank and DepositeThingsInBank functions.
         if (failCounter = 10) then
         begin
           failCounter := 0;
@@ -284,19 +321,22 @@ begin
           TeleToBarbGoToBank;
           DepositeThingsInBank;
         end else
+        //If haven't failed finding the bank 10 times yet try to find bank again.
         begin
           DepositeThingsInBank;
         end;
       end;
     end else
+    //Didn't find blue text. Click map where you are standing.
     begin
       writeln('Didnt find color BankBlue'+toStr(foundPnt));
-      MoveMouse(637, 115);
+      MoveMouse(639, 115);
       wait(500);
       FastClick(Mouse_left);
       wait(1500);
       writeln('failCounter'+toStr(failCounter));
       failCounter := (failCounter + 1);
+      //If didn't find bank 10 times. Run TeleToBarbGoToBank and DepositeThingsInBank functions.
       if (failCounter = 10) then
       begin
         failCounter := 0;
@@ -304,19 +344,22 @@ begin
         TeleToBarbGoToBank;
         DepositeThingsInBank;
       end else
+      //If haven't failed finding the bank 10 times yet try to find bank again.
       begin
         DepositeThingsInBank;
       end;
     end;
   end else
   begin
+    //Didn't find bankbox. Click map where you are standing.
     writeln('Didnt find color BankBox'+toStr(foundPnt));
-    MoveMouse(637, 115);
+    MoveMouse(639, 115);
     wait(500);
     FastClick(Mouse_left);
     wait(1500);
     writeln('failCounter'+toStr(failCounter));
     failCounter := (failCounter + 1);
+    //If didn't find bank 10 times. Run TeleToBarbGoToBank and DepositeThingsInBank functions.
     if (failCounter = 10) then
     begin
       failCounter := 0;
@@ -324,6 +367,7 @@ begin
       TeleToBarbGoToBank;
       DepositeThingsInBank;
     end else
+    //If haven't failed finding the bank 10 times yet try to find bank again.
     begin
       DepositeThingsInBank;
     end;
@@ -335,32 +379,36 @@ var
   foundPnt    : TPoint;
   var x, y: integer;
 begin
-  //3 repeat
-  //1 rep
+
+  //Buy 1.
   MoveMouse(69, 117);
   wait(100);
   FastClick(Mouse_right);
-  MoveMouse(61, 181);
+  MoveMouse(61, 191);
   wait(100);
   FastClick(Mouse_left);
-  //2 rep
+
+  //Buy 2.
   MoveMouse(69, 117);
   wait(100);
   FastClick(Mouse_right);
-  MoveMouse(61, 181);
+  MoveMouse(61, 191);
   wait(100);
   FastClick(Mouse_left);
-  //3 rep
+
+  //Buy 3.
   MoveMouse(69, 117);
   wait(100);
   FastClick(Mouse_right);
-  MoveMouse(61, 181);
+  MoveMouse(61, 191);
   wait(100);
   FastClick(Mouse_left);
+
   //click on shop exit buttom
   MoveMouse(467, 68);
   wait(200);
   FastClick(Mouse_left);
+
   //click on magic spell
   MoveMouse(573, 284);
   wait(300);
@@ -379,7 +427,6 @@ begin
     DepositeThingsInBank;
     OpenShop;
     BuyFromShop;
-    MimeCheck;
     ChickenCheck;
     wait(100);
     ChickenCheck;
