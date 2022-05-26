@@ -1,3 +1,7 @@
+//Be near a normal blue farmer. Level 7.
+//Have brigthness as default at 62%.
+//Have NPC option priority deselected.
+
 program new;
 //{$DEFINE SMART}
 {$i AeroLib/AeroLib.Simba}
@@ -16,14 +20,14 @@ var
   foundPnt    : TPoint;
   var x, y: integer;
 begin
-  color_White.create(7045220, 1, 1.26, 0.03);
+  color_White.create(9605496, 1, 1.26, 0.03);
   color_ShopkeeperYellowText.create(65278, 1, 1.26, 0.03);
   color_HealthRed.create(855540, 1, 1.26, 0.03);
   color_MonkfishPink.create(8290746, 1, 1.26, 0.03);
   color_MonkfishOrangeText.create(4231166, 1, 1.26, 0.03);
   color_HealthYellow.create(65278, 1, 1.26, 0.03);
   if color_White.findIn(AREA_MS, foundPnt) then
-  begin                     16711168
+  begin
     writeln('Found color at'+toStr(foundPnt));
     HumanMMouse(foundPnt, 0, 0);
     if color_ShopkeeperYellowText.findIn(AREA_MS, foundPnt) then
