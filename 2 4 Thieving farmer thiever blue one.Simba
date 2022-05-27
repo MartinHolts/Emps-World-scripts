@@ -1,5 +1,5 @@
 //Be near a normal blue farmer. Level 7.
-//Have brigthness as default at 62%.
+//Leave brightness as is at 62% or 13%, whichever works.
 //Have NPC option priority deselected.
 
 program new;
