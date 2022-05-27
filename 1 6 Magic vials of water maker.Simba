@@ -62,7 +62,7 @@ var
   color_ChickenYellow : TColEx;
   foundPnt    : TPoint;
 begin
-  color_ChickenYellow.create(11598844, 1, 1.26, 0.03);
+  color_ChickenYellow.create(5438204, 1, 1.26, 0.03);
   if color_ChickenYellow.findIn(AREA_MM, foundPnt) then
   begin
     writeln('Found color ChickenYellow'+toStr(foundPnt));
@@ -296,7 +296,7 @@ begin
       writeln('Found color BankBlue'+toStr(foundPnt));
       wait(300);
       FastClick(Mouse_left);
-      wait(1500);
+      wait(2000);
       //Run DepositeVialsOfWater function if find orange text.
       if color_ShopOrange.findIn(AREA_MS, foundPnt) then
       begin
