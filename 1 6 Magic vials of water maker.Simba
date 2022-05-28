@@ -1,3 +1,7 @@
+//OUTPUT
+//4500 vials of water per hour.
+//If sold 3k ea then 13.5m per hour.
+
 //SCREEN SIZE
 //Set to Resizable-screen size. Then Fixed-Screen size.
 //Screen size should be (770 530).
@@ -21,6 +25,8 @@
 
 //POSSIBLE CHANGES.
 //Can comment out spell part if only wish to buy empty vials.
+//Might have to disable option to show private chat above chatbox.
+//Might have to change color for shopper head, because color changes a little every startup.
 
 program new;
 {$i AeroLib/AeroLib.Simba}
@@ -47,7 +53,7 @@ begin
     wait(5000);
 
     //click on minimap to go to bank
-    MoveMouse(622, 64);
+    MoveMouse(620, 64);
     wait(100);
     FastClick(Mouse_left);
     wait(random(6000,7000));
@@ -107,7 +113,7 @@ var
   foundPnt    : TPoint;
   var x, y: integer;
 begin
-  color_ShopKeeperHeadOrange.create(1528204, 0, 0, 0);
+  color_ShopKeeperHeadOrange.create(1132164, 0, 1.26, 0.03);
   color_ShopkeeperYellowText.create(65278, 1, 1.26, 0.03);
   color_ShopOrange.create(2070783, 1, 1.26, 0.03);
 
@@ -287,7 +293,7 @@ begin
   begin
     HumanMMouse(foundPnt, 0, 0);
     GetMousePos(x, y);
-    MoveMouse(x + 5, y + 10);
+    MoveMouse(x + 5, y + 4);
     writeln('Found color BankBox'+toStr(foundPnt));
     wait(300);
     //Left click to open bank if found blue text.
@@ -296,7 +302,7 @@ begin
       writeln('Found color BankBlue'+toStr(foundPnt));
       wait(300);
       FastClick(Mouse_left);
-      wait(2000);
+      wait(2500);
       //Run DepositeVialsOfWater function if find orange text.
       if color_ShopOrange.findIn(AREA_MS, foundPnt) then
       begin
