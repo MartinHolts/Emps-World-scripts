@@ -1,5 +1,5 @@
 //Be near a master farmer when starting the script.
-//Leave brightness as is at 62%.
+//Leave brightness as is at 62% or 13%, whichever works.
 
 program new;
 //{$DEFINE SMART}
