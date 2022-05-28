@@ -1,3 +1,13 @@
+//OUTPUT
+//Run time: 45 seconds.
+//Runes used per hour with 3 pouches:4000.
+//If making 5.5x blood runes. 20000 blood runes per hour.
+//If buying rune ess 2k ea and selling blood runes 1k ea.
+//Then 12m per hour.
+//If making 11x blood runes. 44000 blood runes per hour.
+//If buying pure ess 6k ea and selling blood runes 1k ea.
+//Then 44000-6x4000=44000-24000=20000. 20m per hour.
+
 //SCREEN SIZE
 //Set to Fixed-Screen size. Then Resizable screen size.
 //Screen size should be (790 570).
@@ -33,7 +43,7 @@ var
 
 const
 //blood nature death water fire soul
-  OurWords = 'nature';
+  OurWords = 'blood';
 //0 1 2 3 4
   NumberOfPouchesToUse = 3;
 
@@ -236,178 +246,79 @@ begin
   writeln('Found color Altar BlueText at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
   FastClick(Mouse_left);
 
-  wait(5000);
+  wait(6000);
 end;
 
-Procedure CraftRuneAtAltarSecondTimeSoul;
+Procedure CraftRunesAtAltar;
 begin
-  //Click on Altar
-  MoveMouse(435, 330);
-  wait(100);
-  FastClick(Mouse_left);
-end;
+  Case OurWords Of
+    'blood':
+    begin
+      //Click on Altar
+      MoveMouse(170, 37);
+      wait(100);
+      FastClick(Mouse_left);
+      wait(2500);
+    end;
+    'nature':
+    begin
+      //Click on Altar
+      MoveMouse(399, 48);
+      wait(100);
+      FastClick(Mouse_left);
+      wait(2000);
+    end;
+    'death':
+    begin
+      //Click on Altar
+      MoveMouse(284, 44);
+      wait(100);
+      FastClick(Mouse_left);
+      wait(3000);
+    end;
+    'water':
+    begin
+      //Go near altar
+      MoveMouse(638, 108);
+      wait(100);
+      FastClick(Mouse_left);
+      wait(3500);
 
-Procedure CraftRuneAtAltarSecondTimeDeath;
-begin
-  //Click on Altar
-  MoveMouse(361, 220);
-  wait(100);
-  FastClick(Mouse_left);
-end;
+      //Click on Altar
+      MoveMouse(392, 212);
+      wait(100);
+      FastClick(Mouse_left);
+      wait(500);
+    end;
+    'fire':
+    begin
+      //Go near altar
+      MoveMouse(711, 150);
+      wait(100);
+      FastClick(Mouse_left);
+      wait(3500);
 
-Procedure CraftRuneAtAltarSecondTimeNature;
-begin
-  //Click on Altar
-  MoveMouse(407, 232);
-  wait(100);
-  FastClick(Mouse_left);
-end;
+      //Click on Altar
+      MoveMouse(479, 300);
+      wait(100);
+      FastClick(Mouse_left);
+      wait(500);
+    end;
+    'soul':
+    begin
+      //Go near altar
+      MoveMouse(687, 150);
+      wait(100);
+      FastClick(Mouse_left);
+      wait(4500);
 
-Procedure CraftRuneAtAltarSecondTimeBlood;
-begin
-  //Click on Altar
-  MoveMouse(329, 182);
-  wait(100);
-  FastClick(Mouse_left);
-end;
-
-
-Procedure CraftRuneAtAltarSecondTimeWater;
-begin
-  //Click on Altar
-  MoveMouse(392, 212);
-  wait(100);
-  FastClick(Mouse_left);
-end;
-
-Procedure CraftRuneAtAltarSecondTimeFire;
-begin
-  //Click on Altar
-  MoveMouse(479, 300);
-  wait(100);
-  FastClick(Mouse_left);
-end;
-
-Procedure EmptyPouches;
-var
-  x, y : integer;
-
-begin
-  //Empty pouch 1
-  if (NumberOfPouchesToUse >= 1) then
-  begin
-    MoveMouse(600, 300);
-    wait(100);
-    FastClick(Mouse_right);
-    GetMousePos(x, y);
-    MoveMouse(x, y + 45);
-    wait(100);
-    FastClick(Mouse_left);
+      //Click on Altar
+      MoveMouse(435, 330);
+      wait(100);
+      FastClick(Mouse_left);
+      wait(1500);
+    end;
   end;
-
-  //Empty pouch 2
-  if (NumberOfPouchesToUse >= 2) then
-  begin
-    MoveMouse(645, 306);
-    wait(100);
-    FastClick(Mouse_right);
-    GetMousePos(x, y);
-    MoveMouse(x, y + 45);
-    wait(100);
-    FastClick(Mouse_left);
-  end;
-
-  //Empty pouch 3
-  if (NumberOfPouchesToUse >= 3) then
-  begin
-    MoveMouse(685, 304);
-    wait(100);
-    FastClick(Mouse_right);
-    GetMousePos(x, y);
-    MoveMouse(x, y + 45);
-    wait(100);
-    FastClick(Mouse_left);
-  end;
-
-  //Empty pouch 4
-  if (NumberOfPouchesToUse >= 4) then
-  begin
-    MoveMouse(728, 305);
-    wait(100);
-    FastClick(Mouse_right);
-    GetMousePos(x, y);
-    MoveMouse(x, y + 45);
-    wait(100);
-    FastClick(Mouse_left);
-  end;
-end;
-
-Procedure CraftRuneAtAltarSoul;
-begin
-  //Click on Altar
-  MoveMouse(687, 150);
-  wait(100);
-  FastClick(Mouse_left);
-  wait(4500);
-  //Click on Altar
-  MoveMouse(435, 330);
-  wait(100);
-  FastClick(Mouse_left);
-  wait(1500);
-end;
-
-Procedure CraftRuneAtAltarDeath;
-begin
-  //Click on Altar
-  MoveMouse(284, 44);
-  wait(100);
-  FastClick(Mouse_left);
-  wait(3000);
-end;
-
-Procedure CraftRuneAtAltarNature;
-begin
-  //Click on Altar
-  MoveMouse(399, 48);
-  wait(100);
-  FastClick(Mouse_left);
-  wait(2000);
-end;
-
-Procedure CraftRuneAtAltarBlood;
-begin
-  //Click on Altar
-  wait(1000);
-  MoveMouse(167, 36);
-  wait(100);
-  FastClick(Mouse_left);
-  wait(2500);
-end;
-
-Procedure CraftRuneAtAltarWater;
-begin
-  //Click on Altar
-  MoveMouse(638, 108);
-  wait(100);
-  FastClick(Mouse_left);
-  wait(3500);
-  MoveMouse(392, 212);
-  wait(100);
-  FastClick(Mouse_left);
-  wait(500);
-end;
-
-Procedure CraftRuneAtAltarFire;
-begin
-  //Click on Altar
-  MoveMouse(711, 150);
-  wait(100);
-  FastClick(Mouse_left);
-  wait(3500);
-  MoveMouse(479, 300);
-  wait(100);
-  FastClick(Mouse_left);
-  wait(500);
 end;
 
 Procedure TeleToBarbGoToBank;
@@ -532,68 +443,7 @@ begin
 
     GoToAltar;
     EnterAltar;
-
-    //blood
-    if (OurWords = 'blood') then
-    begin
-      CraftRuneAtAltarBlood;
-    end;
-    //nature
-    if (OurWords = 'nature') then
-    begin
-      CraftRuneAtAltarNature;
-    end;
-    //death
-    if (OurWords = 'death') then
-    begin
-      CraftRuneAtAltarDeath;
-    end;
-    if (OurWords = 'water') then
-    begin
-      CraftRuneAtAltarWater;
-    end;
-    if (OurWords = 'fire') then
-    begin
-      CraftRuneAtAltarFire;
-    end;
-    if (OurWords = 'soul') then
-    begin
-      CraftRuneAtAltarSoul;
-    end;
-    if (NumberOfPouchesToUse > 0) then
-    begin
-      EmptyPouches;
-    end;
-    if (NumberOfPouchesToUse > 0) then
-    begin
-      //blood
-      if (OurWords = 'blood') then
-      begin
-        CraftRuneAtAltarSecondTimeBlood;
-      end;
-      //nature
-      if (OurWords = 'nature') then
-      begin
-        CraftRuneAtAltarSecondTimeNature;
-      end;
-      //death
-      if (OurWords = 'death') then
-      begin
-        CraftRuneAtAltarSecondTimeDeath;
-      end;
-      if (OurWords = 'water') then
-      begin
-        CraftRuneAtAltarSecondTimeWater;
-      end;
-      if (OurWords = 'fire') then
-      begin
-        CraftRuneAtAltarSecondTimeFire;
-      end;
-      if (OurWords = 'soul') then
-      begin
-        CraftRuneAtAltarSecondTimeSoul;
-      end;
-    end;
+    CraftRunesAtAltar;
 
     TeleToBarbGoToBank;
   Until(False);

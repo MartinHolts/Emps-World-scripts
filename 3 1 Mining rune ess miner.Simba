@@ -1,3 +1,6 @@
+//OUTPUT
+//1500 Rune ess per hour.
+//That's 3m per hour if sold 2k ea.
 //SCREEN SIZE
 //Set to Fixed-Screen size. Then Resizable screen size.
 //Screen size should be (790 570).
@@ -10,6 +13,7 @@
 //Set camera to most top.
 //Set camera to north, by clicking on compass.
 //Leave brightness as is at 62% or 13%, whichever works.
+//Have inv tab open.
 
 //BANK AND INV
 //Have 1st and last space on infentory free.
@@ -112,7 +116,7 @@ begin
     wait(100);
     failCounter := failCounter + 1;
     //If find rune essence in last inventory spot stop waiting and continue with script.
-    if findColorTolerance(x, y, 4737358, 715, 498, 745, 532, 0) then
+    if findColorTolerance(x, y, 4605516, 715, 498, 745, 532, 0) then
     begin
       break;
     end;
