@@ -8,10 +8,11 @@ var
   ATPA: T2DPointArray;     //the groups we found
   i: Int32;
 begin
-  if srl.FindColors(TPA, CTS2(4871751, 100, 0.01, 0.01), Box(4,4, 503, 336)) > 0 then
+  if srl.FindColors(TPA, CTS2(6385014, 50, 0.01, 0.01), Box(4,4, 503, 336)) > 0 then
   begin
     WriteLn('I found ',Length(TPA),' points');
-    ATPA := TPA.Cluster(4);           ;
+    ATPA := TPA.Cluster(4);
+    ATPA.FilterSize(50,100);
 
     // loop through every group and click on first pixel in it.
     for Group in ATPA do
@@ -22,7 +23,7 @@ begin
       if srl.FindColors(TPA, CTS2(65535, 1, 0.01, 0.01), Box(81,32, 181, 50)) > 0 then
       begin
         Mouse.Click(MOUSE_LEFT);
-        wait(500);
+        wait(2000);
         Break;
       end;
     end;
