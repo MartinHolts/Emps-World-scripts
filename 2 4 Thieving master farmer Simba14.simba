@@ -1,30 +1,43 @@
+//Can only use sharks.
+//Have fixed screen mode.
+//Have inventory tab open if want to eat sharks.
+
 program masterFarmerPickpocketer;
 {$I SRL/OSR.simba}
+var
+  timePassed: Int32;
 
 procedure clickOnFarmer();
 var
   TPA,Group: TPointArray;
   ATPA: T2DPointArray;
 begin
-  if srl.FindColors(TPA, CTS2(6385014, 50, 0.01, 0.01), Box(4,4, 503, 336)) > 0 then
+  wait(100);
+  timePassed := timePassed + 100;
+
+  if srl.FindColors(TPA, CTS2(6055536, 5, 0.5, 0.1), Box(4,4, 503, 336)) > 0 then
   begin
     WriteLn('I found ',Length(TPA),' points');
-    ATPA := TPA.Cluster(4);
-    ATPA.FilterSize(45,100);
+    ATPA := TPA.Cluster(2);
+    ATPA.FilterSize(10,150);
+    //ATPA.SortByMiddle(Mainscreen.Center);
+    ATPA.SortBySize;
 
-    // loop through every group and click on first pixel in it.
+    // loop through every group and move to first pixel in it.
     for Group in ATPA do
     begin
-      Mouse.Move( Group[0] );
+      Mouse.Move( (Group[0]) );
 
-      //If find yellow color on top left then leftclick.
-      if srl.FindColors(TPA, CTS2(65535, 0, 0, 0), Box(81,32, 181, 50)) > 0 then
+      //If find yellow color on top left and 2 seconds has passed then leftclick.
+      if (srl.FindColors(TPA, CTS2(65535, 0, 0, 0), Box(81,32, 181, 50)) > 0) AND (timePassed >= 1000) then
       begin
         Mouse.Click(MOUSE_LEFT);
-        wait(2000);
+        timePassed := 0;
         Break;
       end;
+
     end;
+
   end;
 end;
 
