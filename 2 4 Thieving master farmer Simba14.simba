@@ -1,3 +1,4 @@
+//Money per hour 4m.
 //Xp per hour: 357 000
 //Can only use sharks.
 //Have fixed screen mode.
@@ -19,10 +20,10 @@ begin
   wait(100);
   timePassed := timePassed + 100;
 
-  if srl.FindColors(TPA, CTS2(6055536, 5, 0.5, 0.1), Box(4,4, 503, 336)) > 0 then
+  if srl.FindColors(TPA, CTS2(5858415, 100, 0.01, 0.01), Box(4,4, 503, 336)) > 0 then
   begin
     ATPA := TPA.Cluster(2);
-    ATPA.FilterSize(15,150);
+    ATPA.FilterSize(30, 150);
     //ATPA.SortByMiddle(Mainscreen.Center);
     ATPA.SortBySize;
 
@@ -46,8 +47,7 @@ end;
 
 procedure checkHealthAndEat();
 var
-  TPA,Group: TPointArray;
-  ATPA: T2DPointArray;
+  TPA: TPointArray;
 begin
   //If health numbers are yellow next health bar that is next to map THEN look for sharks in inventory.
   if srl.FindColors(TPA, CTS2(65535, 0, 0, 0), Box(725, 62, 737, 73)) > 0 then
