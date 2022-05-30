@@ -1,6 +1,8 @@
 //Can only use sharks.
 //Have fixed screen mode.
 //Have inventory tab open if want to eat sharks.
+//This script works on master farmers with blue shirt. 1 is in falador farm.
+//Can lock him in tiny room so the farmer doesn't go out of the screen of client.
 
 program masterFarmerPickpocketer;
 {$I SRL/OSR.simba}
@@ -22,7 +24,7 @@ begin
     //ATPA.SortByMiddle(Mainscreen.Center);
     ATPA.SortBySize;
 
-    // loop through every group and move  to first pixel in it.
+    // loop through every group and move mouse to most middle pixel in the group.
     for Group in ATPA do
     begin
       Mouse.Move(MiddleTPA(Group));
