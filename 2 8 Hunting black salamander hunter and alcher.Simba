@@ -1,3 +1,7 @@
+//OUTPUT
+//5m per hour.
+//240 000 hunting xp per hour.
+
 //SCREEN SIZE
 //Set to Resizable-screen size. Then Fixed-Screen size.
 //Screen size should be (770 530).
@@ -78,7 +82,7 @@ var
   color_NatureWhiteNumbers : TColEx;
   foundPnt    : TPoint;
 begin
-  color_BlackSalamanderBlack.create(1118485, 1, 1.26, 0.03);
+  color_BlackSalamanderBlack.create(1513239, 1, 1.26, 0.03);
   color_NatureWhiteNumbers.create(65278, 1, 1.26, 0.03);
   if color_BlackSalamanderBlack.findIn(AREA_INV, foundPnt) then
   begin
@@ -129,7 +133,7 @@ var
   color_TopLeftBlue : TColEx;
   foundPntOne    : TPoint;
 begin
-  color_BoxTrapBrownInInv.create(7178649, 1, 1.26, 0.03);
+  color_BoxTrapBrownInInv.create(6323597, 1, 1.26, 0.03);
   color_TopLeftBlue.create(16711168, 1, 1.26, 0.03);
 
   //pick up box 1
@@ -183,7 +187,7 @@ var
   color_TopLeftBlue : TColEx;
   foundPntTwo    : TPoint;
 begin
-  color_BoxTrapBrownInInv.create(7178649, 1, 1.26, 0.03);
+  color_BoxTrapBrownInInv.create(6323597, 1, 1.26, 0.03);
   color_TopLeftBlue.create(16711168, 1, 1.26, 0.03);
 
   //pick up box 2
@@ -237,7 +241,7 @@ var
   color_TopLeftBlue : TColEx;
   foundPntThree    : TPoint;
 begin
-  color_BoxTrapBrownInInv.create(7178649, 1, 1.26, 0.03);
+  color_BoxTrapBrownInInv.create(6323597, 1, 1.26, 0.03);
   color_TopLeftBlue.create(16711168, 1, 1.26, 0.03);
 
   //pick up box 3
@@ -291,7 +295,7 @@ var
   color_TopLeftBlue : TColEx;
   foundPntFour    : TPoint;
 begin
-  color_BoxTrapBrownInInv.create(7178649, 1, 1.26, 0.03);
+  color_BoxTrapBrownInInv.create(6323597, 1, 1.26, 0.03);
   color_TopLeftBlue.create(16711168, 1, 1.26, 0.03);
 
   //pick up box 4
