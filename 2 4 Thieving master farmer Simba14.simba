@@ -17,16 +17,15 @@ begin
 
   if srl.FindColors(TPA, CTS2(6055536, 5, 0.5, 0.1), Box(4,4, 503, 336)) > 0 then
   begin
-    WriteLn('I found ',Length(TPA),' points');
     ATPA := TPA.Cluster(2);
-    ATPA.FilterSize(10,150);
+    ATPA.FilterSize(15,150);
     //ATPA.SortByMiddle(Mainscreen.Center);
     ATPA.SortBySize;
 
-    // loop through every group and move to first pixel in it.
+    // loop through every group and move  to first pixel in it.
     for Group in ATPA do
     begin
-      Mouse.Move( (Group[0]) );
+      Mouse.Move(MiddleTPA(Group));
 
       //If find yellow color on top left and 2 seconds has passed then leftclick.
       if (srl.FindColors(TPA, CTS2(65535, 0, 0, 0), Box(81,32, 181, 50)) > 0) AND (timePassed >= 1000) then
