@@ -9,18 +9,17 @@
 
 program masterFarmerPickpocketer;
 {$I SRL/OSR.simba}
-var
-  timePassed: Int32;
 
 procedure clickOnFarmer();
 var
   TPA,Group: TPointArray;
-  ATPA: T2DPointArray;
+  ATPA: T2DPointArray;  
+  timePassed: Int32;
 begin
   wait(100);
   timePassed := timePassed + 100;
 
-  if srl.FindColors(TPA, CTS2(5858415, 100, 0.01, 0.01), Box(4,4, 503, 336)) > 0 then
+  if (srl.FindColors(TPA, CTS2(5858415, 100, 0.01, 0.01), Box(4,4, 503, 336)) >= 1) then
   begin
     ATPA := TPA.Cluster(2);
     ATPA.FilterSize(30, 150);
@@ -33,7 +32,7 @@ begin
       Mouse.Move(MiddleTPA(Group));
 
       //If find yellow color on top left and 2 seconds has passed then leftclick.
-      if (srl.FindColors(TPA, CTS2(65535, 0, 0, 0), Box(81,32, 181, 50)) > 0) AND (timePassed >= 1000) then
+      if (srl.FindColors(TPA, CTS2(65535, 0, 0, 0), Box(81,32, 181, 50)) >= 1) AND (timePassed >= 1000) then
       begin
         Mouse.Click(MOUSE_LEFT);
         timePassed := 0;
@@ -50,7 +49,7 @@ var
   TPA: TPointArray;
 begin
   //If health numbers are yellow next health bar that is next to map THEN look for sharks in inventory.
-  if srl.FindColors(TPA, CTS2(65535, 0, 0, 0), Box(725, 62, 737, 73)) > 0 then
+  if (srl.FindColors(TPA, CTS2(65535, 0, 0, 0), Box(725, 62, 737, 73)) >= 1) then
     begin
       //If find sharks in inventory THEN move mouse to it and click on it.
       if srl.FindColors(TPA, CTS2(6387343, 1, 0.01, 0.01), Box(554,237, 734, 493)) > 0 then
