@@ -1,12 +1,13 @@
 //OUTPUT
 //Run time: 45 seconds.
 //Runes used per hour with 3 pouches:4000.
-//If making 5.5x blood runes. 20000 blood runes per hour.
+//If making 5.5x blood runes. 22000 blood runes per hour.
 //If buying rune ess 2k ea and selling blood runes 1k ea.
-//Then 12m per hour.
+//Then 16m per hour. 22m-4*2m=22-8=16m   22m-4*5.5m=0m
 //If making 11x blood runes. 44000 blood runes per hour.
 //If buying pure ess 6k ea and selling blood runes 1k ea.
 //Then 44000-6x4000=44000-24000=20000. 20m per hour.
+//Then 44000-11x4000=0
 
 //SCREEN SIZE
 //Set to Fixed-Screen size. Then Resizable screen size.
@@ -43,7 +44,7 @@ var
 
 const
 //blood nature death water fire soul
-  OurWords = 'blood';
+  OurWords = 'death';
 //0 1 2 3 4
   NumberOfPouchesToUse = 3;
 
@@ -66,7 +67,7 @@ begin
 
   //Move mouse to where BankBox color was found.
   writeln('Found color BankBox at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
-  MoveMouse(x + 15, y + 10);
+  MoveMouse(x + 5, y + 5);
 
   //Wait for blue text.
   while ((failCounter <= 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 16776960, 41, 32, 128, 47, 0))) do
