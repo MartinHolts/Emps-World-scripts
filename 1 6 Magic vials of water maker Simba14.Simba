@@ -107,7 +107,7 @@ begin
   end;
 end;
 
-Procedure depositeVialsOfWater();
+Function depositeVialsOfWater(): string;
 var                                  
   TPA,Group: TPointArray;
   ATPA: T2DPointArray;
@@ -116,15 +116,15 @@ var
   color_BankBlue : TCTS2Color;
   color_ShopOrange : TCTS2Color;
 begin
-  color_BankBox := CTS2(4737101, 1, 1.26, 0.03);
+  color_BankBox := CTS2(4737102, 50, 0.01, 0.01);
   color_BankBlue := CTS2(16776960, 1, 1.26, 0.03);
   color_ShopOrange := CTS2(2070783, 1, 1.26, 0.03);
 
   //Move mouse to bankbox if find bankbox color.
   if (srl.FindColors(TPA, color_BankBox, Box(0,0, 760, 530)) >= 1) then
   begin
-    ATPA := TPA.Cluster(2);
-    ATPA.FilterSize(5, 150);
+    ATPA := TPA.Cluster(4);
+    ATPA.FilterSize(500, 1500);
     //ATPA.SortByMiddle(Mainscreen.Center);
     ATPA.SortBySize;
 
@@ -165,13 +165,14 @@ begin
           wait(200);
           Mouse.Click(MOUSE_LEFT);
           wait(200);
+          result := 'success';
         end;
       end;
     end;
   end;
 end;
 
-Procedure buyFromShop();
+Function buyFromShop(): string;
 var
   TPA,Group: TPointArray;
   ATPA: T2DPointArray;
@@ -181,7 +182,7 @@ var
   foundPnt    : TPoint;
   var x, y: integer;
 begin
-  color_ShopKeeperHeadOrange := CTS2(1132164, 5, 1.26, 0.03);
+  color_ShopKeeperHeadOrange := CTS2(1131907, 100, 0.01, 0.01);
   color_ShopkeeperYellowText := CTS2(65535, 1, 0.01, 0.01);
   color_ShopOrange := CTS2(2070783, 1, 1.26, 0.03);
 
@@ -189,7 +190,7 @@ begin
   if (srl.FindColors(TPA, color_ShopKeeperHeadOrange, Box(0,0, 760, 530)) >= 1) then
   begin                  
     ATPA := TPA.Cluster(5);
-    ATPA.FilterSize(3, 150);
+    ATPA.FilterSize(20, 150);
     //ATPA.SortByMiddle(Mainscreen.Center);
     ATPA.SortBySize;
 
@@ -252,6 +253,7 @@ begin
           begin
             wait(random(1000,8000));
           end;
+          result := 'success';
 
           //Break out of the function.
           break;
@@ -266,9 +268,18 @@ begin
   Mouse.Speed := 10000;
   repeat
 
-    depositeVialsOfWater();
+    //Deposite vials until succeed.
+    while depositeVialsOfWater() = 'false' do
+    begin 
+      depositeVialsOfWater();
+    end;
 
-    buyFromShop();
+    //Buy from shop until succeed.
+    while buyFromShop() = 'false' do
+    begin
+      buyFromShop();
+    end;
+
 
     //ChickenCheck;
     //wait(100);
