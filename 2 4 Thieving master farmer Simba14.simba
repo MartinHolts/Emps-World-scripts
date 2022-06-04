@@ -9,15 +9,17 @@
 
 program masterFarmerPickpocketer;
 {$I SRL/OSR.simba}
+var
+  timePassed: Int32;
 
 procedure clickOnFarmer();
 var
   TPA,Group: TPointArray;
-  ATPA: T2DPointArray;  
-  timePassed: Int32;
+  ATPA: T2DPointArray;
 begin
   wait(100);
   timePassed := timePassed + 100;
+  WriteLn(timePassed);
 
   if (srl.FindColors(TPA, CTS2(5858415, 100, 0.01, 0.01), Box(4,4, 503, 336)) >= 1) then
   begin
