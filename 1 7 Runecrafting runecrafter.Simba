@@ -183,32 +183,34 @@ begin
   MoveMouse(619, 87);
   wait(100);
   FastClick(Mouse_left);
+
   //Wait while red flag appears.                           //Main PC Win 10
-  while ((failCounter <= 65) AND (Not findColorTolerance(x, y, 662945, 606, 38, 775, 198, 0))) do
+  while ((failCounter <= 65) AND (Not findColorTolerance(x, y, 255, 606, 38, 775, 198, 0))) do
   begin
-  wait(100);
-  failCounter := failCounter + 1;
+    wait(100);
+    failCounter := failCounter + 1;
   end;
   wait(100);
   failCounter := 0;
 
   //Wait while red flag disapears.                      //Main PC Win 10
-  while ((failCounter <= 65) AND (findColorTolerance(x, y, 662945, 606, 38, 775, 198, 0))) do
+  while ((failCounter <= 65) AND (findColorTolerance(x, y, 255, 606, 38, 775, 198, 0))) do
   begin
-  wait(100);
-  failCounter := failCounter + 1;
+    wait(100);
+    failCounter := failCounter + 1;
   end;
   wait(100);
   failCounter := 0;
 
-  wait(1000);
+  wait(500);
 
   //Click 2 on minimap
-  MoveMouse(637, 90);
+  MoveMouse(635, 90);
   wait(100);
   FastClick(Mouse_left);
+
   //Wait while red flag appears.
-  while ((failCounter <= 65) AND (Not findColorTolerance(x, y, 662945, 606, 38, 775, 198, 0))) do
+  while ((failCounter <= 65) AND (Not findColorTolerance(x, y, 255, 606, 38, 775, 198, 0))) do
   begin
     wait(100);
     failCounter := failCounter + 1;
@@ -217,7 +219,7 @@ begin
   failCounter := 0;
 
   //Wait while red flag disapears.
-  while ((failCounter <= 65) AND (findColorTolerance(x, y, 662945, 606, 38, 775, 198, 0))) do
+  while ((failCounter <= 65) AND (findColorTolerance(x, y, 255, 606, 38, 775, 198, 0))) do
   begin
     wait(100);
     failCounter := failCounter + 1;
