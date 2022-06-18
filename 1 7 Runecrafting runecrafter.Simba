@@ -44,9 +44,9 @@ var
 
 const
 //blood nature death water fire soul
-  OurWords = 'death';
+  OurWords = 'blood';
 //0 1 2 3 4
-  NumberOfPouchesToUse = 3;
+  NumberOfPouchesToUse = 4;
 
 Procedure DepositeThingsInBank;
 var
@@ -72,8 +72,8 @@ begin
   //Wait for blue text.
   while ((failCounter <= 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 16776960, 41, 32, 128, 47, 0))) do
   begin
-  wait(100);
-  failCounter := failCounter + 1;
+    wait(100);
+    failCounter := failCounter + 1;
   end;
   if (failCounter = 65) then
   begin
@@ -89,8 +89,8 @@ begin
   //Wait for shoporange
   while ((failCounter <= 65) AND (PrecedureComplete = 0) AND not (findColorTolerance(x, y, 2070783, 131, 51, 373, 69, 0))) do
   begin
-  wait(100);
-  failCounter := failCounter + 1;
+    wait(100);
+    failCounter := failCounter + 1;
   end;
   if (failCounter = 65) then
   begin
@@ -107,13 +107,19 @@ var
   x, y, counter: integer;
 
 begin
-  //Withdraw rune ess
+  //Move mouse to where rune ess are.
   MoveMouse(57, 132);
   wait(100);
+
+  //Right click on rune ess.
   FastClick(Mouse_right);
-  MoveMouse(95, 214);
   wait(200);
+
+  //Left click on withraw all text.
+  MoveMouse(95, 214);
+  wait(100);
   FastClick(Mouse_left);
+  wait(100);
 
   //close bank tab
   MoveMouse(493, 62);
@@ -124,8 +130,8 @@ begin
   //Wait for bank to close
   while ((failCounter <= 65) AND (findColorTolerance(x, y, 2070783, 131, 51, 373, 69, 0))) do
   begin
-  wait(100);
-  failCounter := failCounter + 1;
+    wait(100);
+    failCounter := failCounter + 1;
   end;
   if (failCounter = 65) then
   begin
@@ -234,7 +240,8 @@ var
 
 begin
   //Move mouse on top of Altar entrance. If blue text appears then enter.
-  MoveMouse(309, 325);
+  MoveMouse(300, 280);
+
   wait(100);
   while ((failCounter <= 30) AND not (findColorTolerance(x, y, 16776960, 0, 0, 790, 570, 0))) do
   begin
@@ -249,7 +256,7 @@ begin
   writeln('Found color Altar BlueText at ' + 'x = ' + toStr(x) + 'y = ' + toStr(y));
   FastClick(Mouse_left);
 
-  wait(6000);
+  wait(5000);
 end;
 
 Procedure CraftRunesAtAltar;
@@ -371,7 +378,7 @@ begin
     writeln('Found color in Square 1');
     //Move to square in bank.
     MoveMouse(670, 70);
-    wait(100);
+    wait(200);
     FastClick(Mouse_left);
   end;
   //SQUARE 2
@@ -381,7 +388,7 @@ begin
     writeln('Found color in Square 2');
     //Move to square in bank.        changed
     MoveMouse(665, 69);
-    wait(100);
+    wait(200);
     FastClick(Mouse_left);
   end;
   //SQUARE 3
@@ -391,7 +398,7 @@ begin
     writeln('Found color in Square 3');
     //Move to square in bank.
     MoveMouse(669, 66);
-    wait(100);
+    wait(200);
     FastClick(Mouse_left);
   end;
   //SQUARE 4
@@ -401,7 +408,7 @@ begin
     writeln('Found color in Square 4');
     //Move to square in bank.
     MoveMouse(666, 65);
-    wait(100);
+    wait(200);
     FastClick(Mouse_left);
   end;
   wait(100);
